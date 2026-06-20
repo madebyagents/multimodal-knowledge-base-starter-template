@@ -13,6 +13,13 @@ backend/static/
 # Data
 backend/chroma_db/
 backend/uploads/
+backend/app_state/
+backend/runtime_reports/
+chroma_db/
+uploads/
+logs/
+*.log
+*.pid
 
 # Env
 .env

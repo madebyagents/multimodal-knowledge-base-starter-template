@@ -21,28 +21,31 @@ export const MODALITY: Record<
 > = {
   image: {
     color:
-      "bg-violet-500/15 text-violet-700 dark:text-violet-300 border-violet-500/30",
+      "border-[#BD8EF1]/40 bg-[#BD8EF1]/15 text-[#543771] dark:text-[#E3CDFF]",
     icon: ImageIcon,
     label: "Image",
   },
   pdf: {
-    color: "bg-rose-500/15 text-rose-700 dark:text-rose-300 border-rose-500/30",
+    color:
+      "border-[#C9A93F]/40 bg-[#C9A93F]/15 text-[#534610] dark:text-[#F3ECD0]",
     icon: FileText,
     label: "PDF",
   },
   video: {
-    color: "bg-sky-500/15 text-sky-700 dark:text-sky-300 border-sky-500/30",
+    color:
+      "border-[#85DA7C]/40 bg-[#85DA7C]/15 text-[#13560E] dark:text-[#D4F7D0]",
     icon: Video,
     label: "Video",
   },
   text: {
     color:
-      "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30",
+      "border-[#B6FFBA]/40 bg-[#B6FFBA]/15 text-[#1F3507] dark:text-[#EAFCE7]",
     icon: FileType,
     label: "Text",
   },
   unknown: {
-    color: "bg-zinc-500/15 text-zinc-700 dark:text-zinc-300 border-zinc-500/30",
+    color:
+      "border-[#A3A58C]/35 bg-[#A3A58C]/15 text-[#4C473B] dark:text-[#C7D2B0]",
     icon: HelpCircle,
     label: "Unknown",
   },

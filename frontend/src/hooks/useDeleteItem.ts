@@ -16,7 +16,12 @@ export function useDeleteItem() {
       const prev = qc.getQueryData<ItemsResponse>(["items"]);
       qc.setQueryData<ItemsResponse>(["items"], (old) =>
         old
-          ? { ...old, items: old.items.filter((i) => i.file_id !== fileId) }
+          ? {
+              ...old,
+              items: old.items.filter((i) => i.file_id !== fileId),
+              returned: Math.max(0, old.returned - 1),
+              total: Math.max(0, old.total - 1),
+            }
           : old,
       );
       return { prev };

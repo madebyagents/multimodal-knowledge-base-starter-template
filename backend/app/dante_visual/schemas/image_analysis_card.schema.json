@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dante.local/schemas/image_analysis_card.v1.json",
+  "title": "Dante Image Analysis Card",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "prompt_version",
+    "image_id",
+    "run_id",
+    "source",
+    "asset",
+    "model_runs",
+    "normalized_analysis",
+    "editorial_judgment",
+    "review",
+    "skill_kb"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "image_analysis_card.v1"
+    },
+    "prompt_version": {
+      "type": "string"
+    },
+    "image_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*-[0-9]{3}$"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "new_relative_path",
+        "sha256",
+        "bytes",
+        "category",
+        "group",
+        "width",
+        "height"
+      ],
+      "properties": {
+        "new_relative_path": {
+          "type": "string"
+        },
+        "old_relative_path": {
+          "type": "string"
+        },
+        "previous_relative_path": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "category": {
+          "type": "string"
+        },
+        "group": {
+          "type": "string"
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "model_runs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["role", "provider", "model", "confidence"],
+        "properties": {
+          "role": {
+            "type": "string"
+          },
+          "provider": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number"
+          },
+          "redacted_raw_path": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "enum": ["pending", "approved", "rejected", "needs_premium", "needs_rerun"]
+        },
+        "reviewer": {
+          "type": ["string", "null"]
+        },
+        "reviewed_at": {
+          "type": ["string", "null"]
+        },
+        "reason": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "skill_kb": {
+      "type": "object",
+      "required": ["canonical_knowledge_hub_promotion"],
+      "properties": {
+        "canonical_knowledge_hub_promotion": {
+          "const": "not_targeted"
+        }
+      }
+    }
+  }
+}

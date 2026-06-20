@@ -59,7 +59,7 @@ export function TabsList({
     <div
       role="tablist"
       className={cn(
-        "inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground",
+        "surface-card inline-flex h-9 items-center justify-center rounded-lg border bg-secondary/70 p-1 text-muted-foreground",
         className,
       )}
       {...props}
@@ -92,7 +92,8 @@ export function TabsTrigger({
       onClick={() => setValue(value)}
       className={cn(
         "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
-        active && "bg-background text-foreground shadow-sm",
+        active &&
+          "bg-primary text-primary-foreground shadow-[0_10px_22px_-16px_color-mix(in_srgb,var(--color-primary)_88%,transparent)]",
         className,
       )}
       {...props}
