@@ -42,7 +42,7 @@ export function PreviewDialog({
   ].filter(Boolean);
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-3xl">
+      <DialogContent className="preview-dialog-panel max-w-3xl">
         <DialogHeader>
           <div className="flex items-center gap-2">
             <ModalityBadge modality={item.modality} />
@@ -57,7 +57,7 @@ export function PreviewDialog({
           )}
         </DialogHeader>
 
-        <div className="mt-4 overflow-hidden rounded-lg border bg-muted">
+        <div className="media-frame mt-4 overflow-hidden rounded-lg border border-border/70">
           <div className="flex max-h-[55vh] items-center justify-center">
             <PreviewThumb
               url={item.preview_url}
@@ -69,7 +69,7 @@ export function PreviewDialog({
         </div>
 
         {item.snippet && (
-          <div className="mt-4 max-h-40 overflow-y-auto rounded-md border bg-muted/40 p-3 text-xs leading-relaxed text-muted-foreground">
+          <div className="comfortable-scrollbar mt-4 max-h-40 overflow-y-auto rounded-md border bg-muted/40 p-3 text-xs leading-relaxed text-muted-foreground">
             {item.snippet}
           </div>
         )}
@@ -83,7 +83,7 @@ export function PreviewDialog({
             {showMeta ? "Hide" : "Show"} metadata
           </button>
           {showMeta && (
-            <pre className="mt-2 max-h-48 overflow-auto rounded-md border bg-muted/40 p-3 text-[11px] text-muted-foreground">
+            <pre className="comfortable-scrollbar mt-2 max-h-48 overflow-auto rounded-md border bg-muted/40 p-3 text-[11px] text-muted-foreground">
               {JSON.stringify(meta, null, 2)}
             </pre>
           )}

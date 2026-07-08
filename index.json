@@ -1,0 +1,89 @@
+{
+  "project": "Dante Multimodal Dashboard",
+  "workspace": "/Users/vidigal/codex/dantedash",
+  "scope": {
+    "in_scope": [
+      "dashboard app",
+      "FastAPI backend",
+      "Vite React frontend",
+      "Electron wrapper",
+      "launcher scripts",
+      "read-only MCP wrapper",
+      "app-specific local Chroma runtime copy"
+    ],
+    "out_of_scope": [
+      "canonical knowledge-hub runtime",
+      "Obsidian vault content",
+      "source high-resolution visual assets",
+      "provider secrets"
+    ]
+  },
+  "stable_interfaces": {
+    "backend_url": "http://127.0.0.1:8035",
+    "frontend_url": "http://127.0.0.1:5173",
+    "launchagent_label": "com.vidigal.obsidian-dante-multimodal-rag",
+    "mcp_server_name": "dante-multimodal-rag",
+    "electron_app": "/Applications/Dante Multimodal Dashboard.app",
+    "main_status_command": "dantedash --status"
+  },
+  "current_expected_kb_shape": {
+    "collection": "dante_multimodal_kb",
+    "total": 4188,
+    "by_modality": {
+      "image": 2094,
+      "text": 2094
+    }
+  },
+  "core_paths": {
+    "readme": "/Users/vidigal/codex/dantedash/README.md",
+    "human_index": "/Users/vidigal/codex/dantedash/index.md",
+    "agent_instructions": "/Users/vidigal/codex/dantedash/AGENTS.md",
+    "claude_instructions": "/Users/vidigal/codex/dantedash/CLAUDE.md",
+    "latest_snapshot": "/Users/vidigal/codex/dantedash/snapshots/LATEST.md",
+    "snapshot_index": "/Users/vidigal/codex/dantedash/snapshots/index.md",
+    "first_snapshot": "/Users/vidigal/codex/dantedash/snapshots/DEEP_MEMORY_DANTEDASH_001.md",
+    "current_thread_snapshot": "/Users/vidigal/codex/dantedash/snapshots/DEEP_MEMORY_DANTEDASH_002.md",
+    "operations_runbook": "/Users/vidigal/codex/dantedash/docs/runbooks/dante-dashboard-operations.md",
+    "migration_note": "/Users/vidigal/codex/dantedash/docs/architecture/workspace-migration.md",
+    "visual_asset_package_contract": "/Users/vidigal/codex/dantedash/docs/architecture/visual-asset-package-contract.md",
+    "mcp_docs": "/Users/vidigal/codex/dantedash/docs/dante-multimodal-mcp.md",
+    "visual_harness_docs": "/Users/vidigal/codex/dantedash/docs/dante-visual-analysis-harness.md",
+    "decoupage_profile_docs": "/Users/vidigal/codex/dantedash/docs/prompts/art-grade-decoupage-vision-analyst.md",
+    "decoupage_prompt": "/Users/vidigal/codex/dantedash/backend/app/dante_visual/prompts/art_grade_decoupage_vision_analyst.md",
+    "decoupage_schema": "/Users/vidigal/codex/dantedash/backend/app/dante_visual/schemas/decoupage_sidecar.schema.json",
+    "decoupage_helper": "/Users/vidigal/codex/dantedash/backend/app/dante_visual/decoupage.py",
+    "decoupage_provider": "/Users/vidigal/codex/dantedash/backend/app/dante_visual/openai_decoupage_provider.py",
+    "decoupage_harness": "/Users/vidigal/codex/dantedash/scripts/dante_visual_decoupage_harness.py"
+  },
+  "source_trees": {
+    "backend": "/Users/vidigal/codex/dantedash/backend",
+    "frontend": "/Users/vidigal/codex/dantedash/frontend",
+    "electron": "/Users/vidigal/codex/dantedash/electron",
+    "scripts": "/Users/vidigal/codex/dantedash/scripts",
+    "docs": "/Users/vidigal/codex/dantedash/docs"
+  },
+  "ignored_runtime_paths": {
+    "backend_env": "/Users/vidigal/codex/dantedash/backend/.env",
+    "chroma_db": "/Users/vidigal/codex/dantedash/chroma_db",
+    "uploads": "/Users/vidigal/codex/dantedash/uploads",
+    "logs": "/Users/vidigal/codex/dantedash/logs",
+    "node_modules": "/Users/vidigal/codex/dantedash/node_modules",
+    "backend_venv": "/Users/vidigal/codex/dantedash/backend/.venv"
+  },
+  "rollback_paths": {
+    "old_sidecar": "/Users/vidigal/claude-code/Obsidian/sidecars/dante-multimodal-rag",
+    "runner_backup": "/Users/vidigal/Obsidian_Dante_AI_RAG_DATA/bin/run-dante-multimodal-rag.sh.backup-20260615-011800",
+    "launchagent_backup": "/Users/vidigal/Library/LaunchAgents/com.vidigal.obsidian-dante-multimodal-rag.plist.backup-20260615-011800",
+    "dantedash_backup": "/Users/vidigal/.local/bin/dantedash.backup-20260615-011800",
+    "codex_config_backup": "/Users/vidigal/.codex/config.toml.backup-20260615-011800",
+    "claude_desktop_config_backup": "/Users/vidigal/Library/Application Support/Claude/claude_desktop_config.json.backup-20260615-011800",
+    "claude_code_config_backup": "/Users/vidigal/.claude.json.backup-20260615-012023",
+    "electron_app_backup": "/Applications/Dante Multimodal Dashboard.app.backup-20260615-012223"
+  },
+  "smoke_commands": [
+    "cd /Users/vidigal/codex/dantedash && scripts/smoke-dante-dashboard.sh",
+    "curl -fsS http://127.0.0.1:8035/api/stats",
+    "curl -fsSI http://127.0.0.1:5173/",
+    "dantedash --status"
+  ]
+}
