@@ -1,0 +1,65 @@
+{
+  "decision": "eligible",
+  "generation_id": "hyperframes-palettes-20260808-v2",
+  "license_sha256": "4259155fb06f127687ee7b0a8a3682d45132db0f2da26cbc0b7a2d1e796436b8",
+  "origin_observation_sha256": "20d07f53e35026e4ea09185f4745267bda88296c295c606e16d7d0d2c171a261",
+  "policy_engine_id": "dantedash.apache-2.0-path-coverage.v1",
+  "schema_version": "dantedash.governed_authority_bundle.v1",
+  "source_decisions": [
+    {
+      "decision": "eligible",
+      "relative_path": "bold-energetic.md",
+      "rights_evidence_sha256": "5e4f51de2d66969a5b52780c1609522ea9d19c80e08e2f4cb7ba48c457c58b6c",
+      "source_id": "hyperframes-palettes:source:17bc6b7889302151b4e5c84c0c6a33df676647078011d9decb2b68810e3baa7f"
+    },
+    {
+      "decision": "eligible",
+      "relative_path": "clean-corporate.md",
+      "rights_evidence_sha256": "b3c5e6b3976dacd2234d8b16504a8ca9a451ede89f09485c929c005e7f0ccf26",
+      "source_id": "hyperframes-palettes:source:d0c8c86838abb77985609629afe600d0ca365eccd835820f309959e8a85cba9d"
+    },
+    {
+      "decision": "eligible",
+      "relative_path": "dark-premium.md",
+      "rights_evidence_sha256": "dcb1f6e5c2c9ca01b0088ab25e3045035a6b9ac7b63224d3f0f8a1ab6e154fda",
+      "source_id": "hyperframes-palettes:source:abfecbf7e8dca3b674376590a0467aac3e13b2135022ae4ec519c4b27c2303b1"
+    },
+    {
+      "decision": "eligible",
+      "relative_path": "jewel-rich.md",
+      "rights_evidence_sha256": "29930ff2b5275de5533541517343892c892822a5c29986c1da8062a1126a9c14",
+      "source_id": "hyperframes-palettes:source:17c8f7506469f66bca4e27ef78c19f0bcbf250f88fe840e3043816b7041c4fc5"
+    },
+    {
+      "decision": "eligible",
+      "relative_path": "monochrome.md",
+      "rights_evidence_sha256": "37cceba4becd7945b0c092fbdc7d2d93110257587be8c2d49d8b49f72df33bce",
+      "source_id": "hyperframes-palettes:source:fe8586f6d70707098859063bdef34d68084f02cf7d5aaa436d4c9915a7ae3748"
+    },
+    {
+      "decision": "eligible",
+      "relative_path": "nature-earth.md",
+      "rights_evidence_sha256": "7911d53c3572b96fce433cef4ca405573f39f9c40fd37a90c767f1b60e2e67a3",
+      "source_id": "hyperframes-palettes:source:9710549b17487787fef3c7cb459cfd6e4ac28c1593bf471fcf55a3b4e546beed"
+    },
+    {
+      "decision": "eligible",
+      "relative_path": "neon-electric.md",
+      "rights_evidence_sha256": "729a3db32dce9974d91d51c0febe6377078130050a28b3129a9f15bd4f33b530",
+      "source_id": "hyperframes-palettes:source:35225bf8d2cd37223e88e0bc59b0a96bc8adeda7225389b3df97b675cfd33dfb"
+    },
+    {
+      "decision": "eligible",
+      "relative_path": "pastel-soft.md",
+      "rights_evidence_sha256": "552a8842407cb38c0270e90b75d7cbd5c1208d542b1549498c0bc2063002f65e",
+      "source_id": "hyperframes-palettes:source:ed4e25bb5f4953c002e55a53320249621437e03b5a11d43e3c1bd32c869b6d95"
+    },
+    {
+      "decision": "eligible",
+      "relative_path": "warm-editorial.md",
+      "rights_evidence_sha256": "43022cefa741dc5b8f3fb7e5a20344897055a128bbf8dfa7e68d91d8095ee32f",
+      "source_id": "hyperframes-palettes:source:c467ee3cc0bbf4b2bedccc8106e18293b8a06dbac8f092b10300492da0e0559a"
+    }
+  ],
+  "trust_registry_sha256": "af050a9c202f4f9bfd7b9b4bd25a8641745f0b3bb528b73808602eb9094c0c8d"
+}

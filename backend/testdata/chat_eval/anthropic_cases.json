@@ -1,0 +1,35 @@
+[
+  {
+    "case_id": "grounded_basic",
+    "question": "What does DanteDash use as evidence?",
+    "source_count": 1,
+    "source_panel_count": 1,
+    "expected_insufficient": false,
+    "answers": {
+      "claude-sonnet-4-6-oauth": "DanteDash answers from retrieved source cards in the local multimodal knowledge base [1].",
+      "claude-opus-4-8-oauth": "DanteDash grounds its chat answers in retrieved source cards from the local knowledge base [1]."
+    }
+  },
+  {
+    "case_id": "partial_evidence",
+    "question": "Does the material cover external web browsing?",
+    "source_count": 1,
+    "source_panel_count": 1,
+    "expected_insufficient": true,
+    "answers": {
+      "claude-sonnet-4-6-oauth": "The retrieved material does not cover external web browsing; it only describes grounded source-card answers [1].",
+      "claude-opus-4-8-oauth": "The retrieved material does not cover external web browsing. It only states that the assistant answers from source cards [1]."
+    }
+  },
+  {
+    "case_id": "conflicting_cards",
+    "question": "How many source cards did the redesign change?",
+    "source_count": 2,
+    "source_panel_count": 2,
+    "expected_insufficient": false,
+    "answers": {
+      "claude-sonnet-4-6-oauth": "The two sources disagree: one says the redesign changed three cards [1], the other says four [2]. The material does not resolve which is correct.",
+      "claude-opus-4-8-oauth": "Accounts conflict here: one card reports three changed [1] and another reports four [2], so the retrieved material does not settle the count."
+    }
+  }
+]

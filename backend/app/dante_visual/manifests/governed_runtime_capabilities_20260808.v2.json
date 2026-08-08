@@ -1,0 +1,247 @@
+{
+  "capabilities": [
+    {
+      "blocking": true,
+      "capability_id": "knowledge_hub.atomic_import",
+      "evidence_refs": [
+        "/service_observations/knowledge_hub/negative_signals",
+        "/service_observations/knowledge_hub/coherence"
+      ],
+      "proof_level": "discovered",
+      "reason": "Read-only discovery and local observations cannot provide service-signed positive capability attestation.",
+      "scope": "knowledge_hub_promotion",
+      "status": "not_provable"
+    },
+    {
+      "blocking": true,
+      "capability_id": "knowledge_hub.gate_close",
+      "evidence_refs": [
+        "/service_observations/knowledge_hub/negative_signals",
+        "/service_observations/knowledge_hub/coherence"
+      ],
+      "proof_level": "discovered",
+      "reason": "Read-only discovery and local observations cannot provide service-signed positive capability attestation.",
+      "scope": "knowledge_hub_promotion",
+      "status": "not_provable"
+    },
+    {
+      "blocking": true,
+      "capability_id": "knowledge_hub.restart",
+      "evidence_refs": [
+        "/service_observations/knowledge_hub/negative_signals",
+        "/service_observations/knowledge_hub/coherence"
+      ],
+      "proof_level": "discovered",
+      "reason": "Read-only discovery and local observations cannot provide service-signed positive capability attestation.",
+      "scope": "knowledge_hub_promotion",
+      "status": "not_provable"
+    },
+    {
+      "blocking": true,
+      "capability_id": "knowledge_hub.single_use_capability",
+      "evidence_refs": [
+        "/service_observations/knowledge_hub/negative_signals",
+        "/service_observations/knowledge_hub/coherence"
+      ],
+      "proof_level": "discovered",
+      "reason": "Read-only discovery and local observations cannot provide service-signed positive capability attestation.",
+      "scope": "knowledge_hub_promotion",
+      "status": "not_provable"
+    },
+    {
+      "blocking": true,
+      "capability_id": "knowledge_hub.watchdog_or_lease_ttl",
+      "evidence_refs": [
+        "/service_observations/knowledge_hub/negative_signals",
+        "/service_observations/knowledge_hub/coherence"
+      ],
+      "proof_level": "discovered",
+      "reason": "Read-only discovery and local observations cannot provide service-signed positive capability attestation.",
+      "scope": "knowledge_hub_promotion",
+      "status": "not_provable"
+    },
+    {
+      "blocking": true,
+      "capability_id": "lightrag.authoritative_payload_hash_lookup",
+      "evidence_refs": [
+        "/service_observations/lightrag/negative_signals",
+        "/service_observations/lightrag/coherence"
+      ],
+      "proof_level": "observed",
+      "reason": "Read-only discovery and local observations cannot provide service-signed positive capability attestation.",
+      "scope": "lightrag_mutation",
+      "status": "not_provable"
+    },
+    {
+      "blocking": true,
+      "capability_id": "lightrag.legacy_identity_reconciliation",
+      "evidence_refs": [
+        "/service_observations/lightrag/negative_signals",
+        "/service_observations/lightrag/coherence"
+      ],
+      "proof_level": "observed",
+      "reason": "Read-only discovery and local observations cannot provide service-signed positive capability attestation.",
+      "scope": "lightrag_mutation",
+      "status": "not_provable"
+    },
+    {
+      "blocking": true,
+      "capability_id": "lightrag.service_enforced_fencing",
+      "evidence_refs": [
+        "/service_observations/lightrag/negative_signals",
+        "/service_observations/lightrag/coherence"
+      ],
+      "proof_level": "observed",
+      "reason": "Read-only discovery and local observations cannot provide service-signed positive capability attestation.",
+      "scope": "lightrag_mutation",
+      "status": "not_provable"
+    }
+  ],
+  "evidence_mode": "redacted_read_only_negative_audit",
+  "gate_decisions": {
+    "knowledge_hub_promotion": {
+      "blockers": [
+        "knowledge_hub.atomic_import",
+        "knowledge_hub.executable_fingerprint_missing",
+        "knowledge_hub.gate_close",
+        "knowledge_hub.openapi_fingerprint_missing",
+        "knowledge_hub.openapi_unavailable",
+        "knowledge_hub.restart",
+        "knowledge_hub.server_epoch_missing",
+        "knowledge_hub.service_identity_missing",
+        "knowledge_hub.single_use_capability",
+        "knowledge_hub.watchdog_or_lease_ttl"
+      ],
+      "decision": "blocked"
+    },
+    "lightrag_mutation": {
+      "blockers": [
+        "lightrag.authoritative_payload_hash_lookup",
+        "lightrag.executable_fingerprint_missing",
+        "lightrag.legacy_identity_reconciliation",
+        "lightrag.server_epoch_missing",
+        "lightrag.service_enforced_fencing",
+        "lightrag.service_identity_missing",
+        "lightrag.service_version_missing"
+      ],
+      "decision": "blocked"
+    },
+    "p0_read_only": {
+      "decision": "allowed",
+      "mutation_allowed": false
+    }
+  },
+  "manifest_id": "hyperframes-palettes-runtime-20260808",
+  "observed_at": "2026-08-08T12:02:53Z",
+  "policy": {
+    "live_mutation_attempted": false,
+    "positive_attestation_supported": false,
+    "promotion_attempted": false
+  },
+  "schema_version": "dantedash.governed_runtime_capabilities.v2",
+  "service_observations": {
+    "knowledge_hub": {
+      "coherence": {
+        "blockers": [
+          "knowledge_hub.executable_fingerprint_missing",
+          "knowledge_hub.openapi_fingerprint_missing",
+          "knowledge_hub.openapi_unavailable",
+          "knowledge_hub.server_epoch_missing",
+          "knowledge_hub.service_identity_missing"
+        ],
+        "coherent": false,
+        "identity_unchanged": true,
+        "openapi_unchanged": false,
+        "stable_server_epoch": false
+      },
+      "negative_signals": {
+        "content_md5_observed": false,
+        "local_client_guard_observed": false,
+        "route_advertised": false
+      },
+      "post": {
+        "identity": {
+          "executable_fingerprint": null,
+          "http_status": 200,
+          "request_error": null,
+          "server_epoch": null,
+          "service_id": null,
+          "version": "0.1.0"
+        },
+        "openapi": {
+          "http_status": 401,
+          "request_error": null,
+          "sha256": null
+        }
+      },
+      "pre": {
+        "identity": {
+          "executable_fingerprint": null,
+          "http_status": 200,
+          "request_error": null,
+          "server_epoch": null,
+          "service_id": null,
+          "version": "0.1.0"
+        },
+        "openapi": {
+          "http_status": 401,
+          "request_error": null,
+          "sha256": null
+        }
+      }
+    },
+    "lightrag": {
+      "coherence": {
+        "blockers": [
+          "lightrag.executable_fingerprint_missing",
+          "lightrag.server_epoch_missing",
+          "lightrag.service_identity_missing",
+          "lightrag.service_version_missing"
+        ],
+        "coherent": false,
+        "identity_unchanged": true,
+        "openapi_unchanged": true,
+        "stable_server_epoch": false
+      },
+      "negative_signals": {
+        "content_md5_observed": true,
+        "local_client_guard_observed": false,
+        "route_advertised": true
+      },
+      "post": {
+        "identity": {
+          "executable_fingerprint": null,
+          "http_status": 200,
+          "request_error": null,
+          "server_epoch": null,
+          "service_id": null,
+          "version": null
+        },
+        "openapi": {
+          "http_status": 200,
+          "request_error": null,
+          "sha256": "2be58b42b621b316a2be118e408e43c2d2152b59263afccb5fac289d6eadc2b7"
+        }
+      },
+      "pre": {
+        "identity": {
+          "executable_fingerprint": null,
+          "http_status": 200,
+          "request_error": null,
+          "server_epoch": null,
+          "service_id": null,
+          "version": null
+        },
+        "openapi": {
+          "http_status": 200,
+          "request_error": null,
+          "sha256": "2be58b42b621b316a2be118e408e43c2d2152b59263afccb5fac289d6eadc2b7"
+        }
+      }
+    }
+  },
+  "subject": {
+    "executable_tree_sha256": "a171d1d50d0e45b7ae9bfaea738148927a367371b3dc797d87fc6ca97c44cac1",
+    "revision": "f763c5481744ac775a4685f2af31148254b529d2"
+  }
+}

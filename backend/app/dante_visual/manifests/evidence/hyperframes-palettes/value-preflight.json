@@ -1,0 +1,63 @@
+{
+  "baseline_queries": [
+    {
+      "local_metadata_covers_need": true,
+      "query_id": "dark-premium-gap",
+      "request_sha256": "6b50d5aa9a091ec366309e9b50ffd308b5a1489187d043cabecc9a5a8c22c0d3",
+      "response_sha256": "5021e624e752b001ce3e3846e8f158ed4aeb93a4c9a72fdb35a0c5b14a0eea84",
+      "result_count": 0
+    },
+    {
+      "local_metadata_covers_need": true,
+      "query_id": "clean-corporate-gap",
+      "request_sha256": "61e2dd4c1daf6fe21c9ebb3654b97d15fe17f4e7bcb7178355cb63ce8fabc9ca",
+      "response_sha256": "5021e624e752b001ce3e3846e8f158ed4aeb93a4c9a72fdb35a0c5b14a0eea84",
+      "result_count": 0
+    },
+    {
+      "local_metadata_covers_need": true,
+      "query_id": "neon-electric-gap",
+      "request_sha256": "27a71889b087e312ce3d9031aeea4e7ce04a9016fbf02b45aec249e0a7e94315",
+      "response_sha256": "5021e624e752b001ce3e3846e8f158ed4aeb93a4c9a72fdb35a0c5b14a0eea84",
+      "result_count": 0
+    },
+    {
+      "local_metadata_covers_need": true,
+      "query_id": "nature-earth-gap",
+      "request_sha256": "29fe09bfda6ee4880cc15bdbc54d05e5218ee1c8dc629433a6ba2c9a2618f6f0",
+      "response_sha256": "5021e624e752b001ce3e3846e8f158ed4aeb93a4c9a72fdb35a0c5b14a0eea84",
+      "result_count": 0
+    }
+  ],
+  "candidate_evaluation": {
+    "answer_criteria_pass_count": 5,
+    "holdout_ids": [
+      "H1",
+      "H2",
+      "H3",
+      "H4",
+      "H5"
+    ],
+    "invented_evidence_claims": 0,
+    "method": "deterministic_curated_metadata_routing",
+    "negative_control_pass_count": 1,
+    "raw_source_body_leaks": 0,
+    "routing_pass_count": 5,
+    "unsupported_current_claims": 0
+  },
+  "captured_at": "2026-08-08T10:48:39Z",
+  "collection_mode": "read_only_local_search_and_curated_metadata_coverage",
+  "dashboard_stats": {
+    "by_modality": {
+      "image": 2423,
+      "text": 4393,
+      "video": 1681
+    },
+    "response_sha256": "6655adc9acf78375f297c18210df5f8492e7faf1439280006b5f0fc92183c89c",
+    "total": 8497
+  },
+  "frontend_head_status": 200,
+  "provider_calls": 0,
+  "schema_version": "dantedash.hyperframes_value_preflight.v1",
+  "source_bodies_persisted": false
+}

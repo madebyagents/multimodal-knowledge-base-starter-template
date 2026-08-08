@@ -1,0 +1,782 @@
+{
+  "type": "json_schema",
+  "name": "decoupage_sidecar",
+  "strict": true,
+  "schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "asset_id",
+      "frame_type",
+      "lens",
+      "one_line",
+      "decoupage_spine",
+      "composition",
+      "camera_lens",
+      "lighting",
+      "color",
+      "art_direction",
+      "costume",
+      "performance",
+      "domain_module",
+      "registers",
+      "lineage",
+      "distinction",
+      "grounding",
+      "proactive_adjacencies",
+      "opinion",
+      "provenance",
+      "markdown_handoff"
+    ],
+    "properties": {
+      "asset_id": {
+        "type": "string"
+      },
+      "frame_type": {
+        "type": "string",
+        "enum": [
+          "film_frame",
+          "still_photograph",
+          "animation_frame",
+          "comic_panel",
+          "artwork",
+          "architecture",
+          "design",
+          "unknown"
+        ]
+      },
+      "lens": {
+        "type": "string",
+        "enum": [
+          "solo",
+          "dp",
+          "art_cast",
+          "critic",
+          "judge",
+          "confrontador"
+        ]
+      },
+      "one_line": {
+        "type": "string",
+        "description": "the frame's logline"
+      },
+      "decoupage_spine": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "form",
+          "angle"
+        ],
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "form": {
+            "type": "string"
+          },
+          "angle": {
+            "type": "string"
+          }
+        }
+      },
+      "composition": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "systems",
+          "depth_layering",
+          "balance",
+          "aspect_ratio",
+          "read"
+        ],
+        "properties": {
+          "systems": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "depth_layering": {
+            "type": "string"
+          },
+          "balance": {
+            "type": "string"
+          },
+          "aspect_ratio": {
+            "type": "string"
+          },
+          "read": {
+            "type": "string",
+            "description": "the diagnostic: where the eye goes first and whether the idea lives there"
+          }
+        }
+      },
+      "camera_lens": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "shot_size",
+          "angle",
+          "height",
+          "focal_length_feel",
+          "estimated_mm",
+          "implied_movement",
+          "dof",
+          "format_tells",
+          "anamorphic",
+          "read"
+        ],
+        "properties": {
+          "shot_size": {
+            "type": "string",
+            "enum": [
+              "ecu",
+              "cu",
+              "mcu",
+              "ms",
+              "cowboy",
+              "mls",
+              "fs",
+              "ws",
+              "els",
+              "establishing",
+              "other"
+            ]
+          },
+          "angle": {
+            "type": "string"
+          },
+          "height": {
+            "type": "string"
+          },
+          "focal_length_feel": {
+            "type": "string"
+          },
+          "estimated_mm": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "value",
+              "confidence"
+            ],
+            "properties": {
+              "value": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "confidence": {
+                "type": "number",
+                "description": "0.0-1.0"
+              }
+            }
+          },
+          "implied_movement": {
+            "type": "string"
+          },
+          "dof": {
+            "type": "string"
+          },
+          "format_tells": {
+            "type": "string"
+          },
+          "anamorphic": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "value",
+              "confidence"
+            ],
+            "properties": {
+              "value": {
+                "type": "boolean"
+              },
+              "confidence": {
+                "type": "number",
+                "description": "0.0-1.0"
+              }
+            }
+          },
+          "read": {
+            "type": "string"
+          }
+        }
+      },
+      "lighting": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "pattern",
+          "quality",
+          "direction",
+          "motivation",
+          "ratio_estimate",
+          "key_tonality",
+          "color_temp_K",
+          "mixed_temp",
+          "read"
+        ],
+        "properties": {
+          "pattern": {
+            "type": "string",
+            "enum": [
+              "butterfly",
+              "clamshell",
+              "loop",
+              "rembrandt",
+              "split",
+              "broad",
+              "short",
+              "rim",
+              "kicker",
+              "top",
+              "under",
+              "silhouette",
+              "flat",
+              "three_point",
+              "other"
+            ]
+          },
+          "quality": {
+            "type": "string"
+          },
+          "direction": {
+            "type": "string"
+          },
+          "motivation": {
+            "type": "string"
+          },
+          "ratio_estimate": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "value",
+              "confidence"
+            ],
+            "properties": {
+              "value": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "e.g. 4:1; never a bare asserted string"
+              },
+              "confidence": {
+                "type": "number",
+                "description": "0.0-1.0"
+              }
+            }
+          },
+          "key_tonality": {
+            "type": "string"
+          },
+          "color_temp_K": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "value",
+              "confidence"
+            ],
+            "properties": {
+              "value": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "confidence": {
+                "type": "number",
+                "description": "0.0-1.0"
+              }
+            }
+          },
+          "mixed_temp": {
+            "type": "boolean"
+          },
+          "read": {
+            "type": "string"
+          }
+        }
+      },
+      "color": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "grade_family",
+          "grade_family_note",
+          "harmony",
+          "palette",
+          "lift_gamma_gain",
+          "saturation",
+          "contrast_curve",
+          "skin_tone",
+          "technical_vs_creative"
+        ],
+        "properties": {
+          "grade_family": {
+            "type": "string",
+            "enum": [
+              "teal_and_orange",
+              "bleach_bypass",
+              "day_for_night",
+              "two_strip_technicolor",
+              "three_strip_technicolor",
+              "monochrome",
+              "sepia",
+              "neon_noir",
+              "pastel_desaturated",
+              "warm_film_emulation",
+              "cross_process",
+              "naturalistic",
+              "stylized",
+              "other"
+            ]
+          },
+          "grade_family_note": {
+            "type": "string"
+          },
+          "harmony": {
+            "type": "string"
+          },
+          "palette": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "hex",
+                "role",
+                "name"
+              ],
+              "properties": {
+                "hex": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "lift_gamma_gain": {
+            "type": "string"
+          },
+          "saturation": {
+            "type": "string"
+          },
+          "contrast_curve": {
+            "type": "string"
+          },
+          "skin_tone": {
+            "type": "string"
+          },
+          "technical_vs_creative": {
+            "type": "string",
+            "description": "what the grade IS vs what it DOES"
+          }
+        }
+      },
+      "art_direction": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "additionalProperties": false,
+        "required": [
+          "world_period",
+          "set_decoration",
+          "props_signified",
+          "texture_materiality",
+          "production_value",
+          "read"
+        ],
+        "properties": {
+          "world_period": {
+            "type": "string"
+          },
+          "set_decoration": {
+            "type": "string"
+          },
+          "props_signified": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "texture_materiality": {
+            "type": "string"
+          },
+          "production_value": {
+            "type": "string",
+            "description": "photographic register only; medium-native or null otherwise"
+          },
+          "read": {
+            "type": "string"
+          }
+        }
+      },
+      "costume": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "additionalProperties": false,
+        "required": [
+          "pieces",
+          "silhouette_period",
+          "character_through_wardrobe",
+          "color_story",
+          "condition_wear"
+        ],
+        "properties": {
+          "pieces": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "silhouette_period": {
+            "type": "string"
+          },
+          "character_through_wardrobe": {
+            "type": "string"
+          },
+          "color_story": {
+            "type": "string"
+          },
+          "condition_wear": {
+            "type": "string"
+          }
+        }
+      },
+      "performance": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "additionalProperties": false,
+        "required": [
+          "present",
+          "physical_type",
+          "status_read",
+          "method_tells",
+          "body_effort",
+          "facs_aus",
+          "displayed_emotion",
+          "subtext",
+          "objective_obstacle",
+          "implied_moment"
+        ],
+        "properties": {
+          "present": {
+            "type": "boolean"
+          },
+          "physical_type": {
+            "type": "string",
+            "description": "casting-grade specifics, never 'a man'"
+          },
+          "status_read": {
+            "type": "string"
+          },
+          "method_tells": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "body_effort": {
+            "type": "string",
+            "description": "Laban: press/punch/wring/slash/glide/dab/float/flick"
+          },
+          "facs_aus": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "displayed_emotion": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "primary",
+              "blend",
+              "intensity",
+              "suppressed"
+            ],
+            "properties": {
+              "primary": {
+                "type": "string"
+              },
+              "blend": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "intensity": {
+                "type": "string",
+                "description": "A-E or 1-5"
+              },
+              "suppressed": {
+                "type": "string"
+              }
+            }
+          },
+          "subtext": {
+            "type": "string"
+          },
+          "objective_obstacle": {
+            "type": "string"
+          },
+          "implied_moment": {
+            "type": "string"
+          }
+        }
+      },
+      "domain_module": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "read"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "comic",
+              "artwork",
+              "architecture",
+              "design",
+              "none"
+            ]
+          },
+          "read": {
+            "type": "string",
+            "description": "genuine type-specific sub-grammar; null the whole module if none applies"
+          }
+        }
+      },
+      "registers": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "technical",
+          "artistic",
+          "taste",
+          "narrative",
+          "philosophical"
+        ],
+        "properties": {
+          "technical": {
+            "type": "string"
+          },
+          "artistic": {
+            "type": "string"
+          },
+          "taste": {
+            "type": "string"
+          },
+          "narrative": {
+            "type": "string"
+          },
+          "philosophical": {
+            "type": "string"
+          }
+        }
+      },
+      "lineage": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "echoes",
+          "why"
+        ],
+        "properties": {
+          "echoes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "why": {
+            "type": "string"
+          }
+        }
+      },
+      "distinction": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "flag",
+          "why",
+          "consistency_of_intention"
+        ],
+        "properties": {
+          "flag": {
+            "type": "string",
+            "enum": [
+              "premium_s_tier",
+              "unusual",
+              "elegant",
+              "innovative",
+              "none"
+            ]
+          },
+          "why": {
+            "type": "string"
+          },
+          "consistency_of_intention": {
+            "type": "boolean"
+          }
+        }
+      },
+      "grounding": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "visible",
+          "inferred",
+          "uncertain",
+          "not_visible"
+        ],
+        "properties": {
+          "visible": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "claim",
+                "visible_support",
+                "confidence"
+              ],
+              "properties": {
+                "claim": {
+                  "type": "string"
+                },
+                "visible_support": {
+                  "type": "string"
+                },
+                "confidence": {
+                  "type": "number",
+                  "description": "0.0-1.0"
+                }
+              }
+            }
+          },
+          "inferred": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "claim",
+                "basis",
+                "confidence"
+              ],
+              "properties": {
+                "claim": {
+                  "type": "string"
+                },
+                "basis": {
+                  "type": "string"
+                },
+                "confidence": {
+                  "type": "number",
+                  "description": "0.0-1.0"
+                }
+              }
+            }
+          },
+          "uncertain": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "not_visible": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "proactive_adjacencies": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "pointer",
+            "why"
+          ],
+          "properties": {
+            "pointer": {
+              "type": "string"
+            },
+            "why": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "opinion": {
+        "type": "string",
+        "description": "the one-paragraph human read (also rendered inside markdown_handoff)"
+      },
+      "provenance": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "lens",
+          "frame_type",
+          "confidence_overall"
+        ],
+        "properties": {
+          "lens": {
+            "type": "string",
+            "enum": [
+              "solo",
+              "dp",
+              "art_cast",
+              "critic",
+              "judge",
+              "confrontador"
+            ]
+          },
+          "frame_type": {
+            "type": "string",
+            "enum": [
+              "film_frame",
+              "still_photograph",
+              "animation_frame",
+              "comic_panel",
+              "artwork",
+              "architecture",
+              "design",
+              "unknown"
+            ]
+          },
+          "confidence_overall": {
+            "type": "number",
+            "description": "0.0-1.0"
+          }
+        }
+      },
+      "markdown_handoff": {
+        "type": "string",
+        "description": "the human-surface curator decoupage + verdict + opinion + open door; names no machinery and no input"
+      }
+    }
+  }
+}

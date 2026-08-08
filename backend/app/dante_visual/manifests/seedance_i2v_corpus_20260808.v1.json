@@ -1,0 +1,1371 @@
+{
+  "schema_version": "dantedash.governed_corpus_policy.v1",
+  "corpus_id": "seedance-i2v-20260808",
+  "policy_version": "2026-08-08.v1",
+  "policy_status": "frozen",
+  "source_root_contract": {
+    "runtime_argument_required": true,
+    "relative_path_base": "runtime_source_root",
+    "read_only": true,
+    "persist_source_root": false,
+    "allow_symlinks": false,
+    "allow_unlisted_files": false,
+    "allowed_extensions": [
+      ".md",
+      ".png"
+    ]
+  },
+  "inventory_contract": {
+    "sort_key": "relative_path",
+    "digest_input_format": "relative_path<TAB>size_bytes<TAB>source_sha256<LF>",
+    "hash_algorithm": "sha256",
+    "expected_markdown_count": 17,
+    "expected_png_count": 4,
+    "expected_file_count": 21,
+    "expected_total_size_bytes": 3388683,
+    "audit_digest_sha256": "38ca2330651ce290da8d97b1d1cb8b2a11ce83161687013af32ac83ede6b40e3"
+  },
+  "source_classes": [
+    {
+      "source_class_id": "c1_operator_local_empirical_text",
+      "description": "Operator-local doctrine, experiment narrative, provenance, and derived empirical analysis.",
+      "expected_member_count": 4,
+      "evidence_available": "Origin and experiment provenance are present, but no hash-bound grant explicitly authorizes local embedding and derived summaries.",
+      "required_true_predicates": [
+        "hash_bound_rights_record_present",
+        "rightsholder_authority_proven",
+        "local_embedding_permission_explicit",
+        "derived_summary_permission_explicit"
+      ],
+      "current_rights_status": "unknown",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "adjudication_reason": "Provenance is not permission; the available evidence does not satisfy the local-use predicates."
+    },
+    {
+      "source_class_id": "c2_notebooklm_web_derived_text",
+      "description": "NotebookLM and web-derived overview, source map, and research synthesis.",
+      "expected_member_count": 3,
+      "evidence_available": "Notebook and task identifiers plus a URL map are present, but source licenses, capture hashes, and local-use grants are not.",
+      "required_true_predicates": [
+        "hash_bound_rights_record_present",
+        "rightsholder_authority_proven",
+        "local_embedding_permission_explicit",
+        "derived_summary_permission_explicit"
+      ],
+      "current_rights_status": "unknown",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "adjudication_reason": "Citation and harvesting provenance do not prove permission to embed or derive new summaries."
+    },
+    {
+      "source_class_id": "c3_chatgpt_connect_derived_text",
+      "description": "ChatGPT-connect upgrade, audit, evidence-ledger, motion-control, and eval artifacts.",
+      "expected_member_count": 8,
+      "evidence_available": "Bundle identifiers, source-relative bundle paths, and promotion metadata are present, but input rights and explicit local-use predicates are not.",
+      "required_true_predicates": [
+        "hash_bound_rights_record_present",
+        "rightsholder_authority_proven",
+        "local_embedding_permission_explicit",
+        "derived_summary_permission_explicit"
+      ],
+      "current_rights_status": "unknown",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "adjudication_reason": "Workflow promotion metadata is not a rights grant and cannot establish rights in the source inputs."
+    },
+    {
+      "source_class_id": "c4_modelark_generated_visual",
+      "description": "Four ModelArk-generated PNG evidence filmstrips copied from declared experiment outputs.",
+      "expected_member_count": 4,
+      "evidence_available": "The corpus copies match their declared originals by hash, but output-use terms and registered-asset or likeness attestations are absent.",
+      "required_true_predicates": [
+        "hash_bound_rights_record_present",
+        "rightsholder_authority_proven",
+        "local_embedding_permission_explicit",
+        "derived_summary_permission_explicit",
+        "generated_output_use_terms_preserved",
+        "registered_asset_or_likeness_attestation_present"
+      ],
+      "current_rights_status": "unknown",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "adjudication_reason": "Byte identity proves provenance only; it does not establish the rights required for embedding or derived visual summaries."
+    },
+    {
+      "source_class_id": "c5_compiled_pack",
+      "description": "Compiled operator-facing packs that combine upstream source classes.",
+      "expected_member_count": 2,
+      "evidence_available": "Upstream relationships are visible, but the packs inherit the least-permissive unresolved status of their inputs.",
+      "required_true_predicates": [
+        "hash_bound_rights_record_present",
+        "rightsholder_authority_proven",
+        "local_embedding_permission_explicit",
+        "derived_summary_permission_explicit"
+      ],
+      "current_rights_status": "unknown",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "adjudication_reason": "Compilation does not cure missing upstream permissions; every contributing source must be covered."
+    }
+  ],
+  "topics": [
+    {
+      "topic_id": "ark_moderation_safety",
+      "description": "ARK output moderation, pre-spend screening, and safety claims.",
+      "expected_member_count": 1,
+      "membership_rule": "source.topic_id_exact_match"
+    },
+    {
+      "topic_id": "i2v_operator_overview",
+      "description": "Broad image-to-video operator guidance and corpus entry points.",
+      "expected_member_count": 2,
+      "membership_rule": "source.topic_id_exact_match"
+    },
+    {
+      "topic_id": "ark_lowmod_controlled_ab",
+      "description": "Controlled ModelArk low-mod A/B evidence and production implications.",
+      "expected_member_count": 7,
+      "membership_rule": "source.topic_id_exact_match"
+    },
+    {
+      "topic_id": "video_model_current_state",
+      "description": "Dated and potentially volatile model capability and comparison claims.",
+      "expected_member_count": 3,
+      "membership_rule": "source.topic_id_exact_match"
+    },
+    {
+      "topic_id": "retrieval_governance",
+      "description": "Retrieval behavior, evaluation, routing, and abstention requirements.",
+      "expected_member_count": 3,
+      "membership_rule": "source.topic_id_exact_match"
+    },
+    {
+      "topic_id": "i2v_motion_control",
+      "description": "Motion, camera, first-frame, first-and-last-frame, and multi-shot control.",
+      "expected_member_count": 1,
+      "membership_rule": "source.topic_id_exact_match"
+    },
+    {
+      "topic_id": "research_provenance",
+      "description": "Source maps, evidence ledgers, and provenance relationships.",
+      "expected_member_count": 4,
+      "membership_rule": "source.topic_id_exact_match"
+    }
+  ],
+  "stage_contract": {
+    "gate_1": {
+      "required_card_role": "source_card",
+      "cumulative_unique_source_count": 1,
+      "selection_rule": "lowest_numeric_risk_rank_among_eligible_sources"
+    },
+    "gate_2": {
+      "cumulative_unique_source_count": 5,
+      "required_new_unique_source_count": 4,
+      "selection_rule": "deterministic_role_and_size_stratification_without_repeated_source_fallback"
+    },
+    "gate_3": {
+      "topic_id": "ark_lowmod_controlled_ab",
+      "minimum_new_sources": 3,
+      "minimum_relationship_patterns": 2,
+      "existing_members_are_noop": true
+    },
+    "full_apply": {
+      "requires_independent_holdout": true,
+      "requires_fresh_rehearsed_checkpoint": true,
+      "requires_zero_unresolved_conflicts_in_eligible_set": true
+    }
+  },
+  "sources": [
+    {
+      "relative_path": "01-notes/2026-06-26-gptimg2-seedance-i2v-doctrine.md",
+      "media_type": "text/markdown",
+      "size_bytes": 3700,
+      "source_sha256": "434871ba99009fb0922d676e4ae6abac5e6e1b91de3aeb62b169ad44989531a4",
+      "source_id": "seedance-i2v:source:434871ba99009fb0922d676e4ae6abac5e6e1b91de3aeb62b169ad44989531a4",
+      "package_id": "seedance-i2v:package:434871ba99009fb0922d676e4ae6abac5e6e1b91de3aeb62b169ad44989531a4",
+      "source_class_id": "c1_operator_local_empirical_text",
+      "topic_id": "ark_moderation_safety",
+      "card_role": "craft_application_card",
+      "risk_rank": 3,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "Operator-local authorship and source pointers are present, but no hash-bound rights record grants embedding or derived-summary use.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "01-notes/2026-06-26-gptimg2-seedance-i2v-doctrine.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "01-notes/README.md",
+      "media_type": "text/markdown",
+      "size_bytes": 405,
+      "source_sha256": "66505c1ad304dbda32878c318659f8dd14b355e63168c312f71ddaddd5d7ae22",
+      "source_id": "seedance-i2v:source:66505c1ad304dbda32878c318659f8dd14b355e63168c312f71ddaddd5d7ae22",
+      "package_id": "seedance-i2v:package:66505c1ad304dbda32878c318659f8dd14b355e63168c312f71ddaddd5d7ae22",
+      "source_class_id": "c2_notebooklm_web_derived_text",
+      "topic_id": "i2v_operator_overview",
+      "card_role": "source_card",
+      "risk_rank": 19,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "The note records NotebookLM provenance but no licenses, capture hashes, or explicit local-use grant.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "02-sources/seedance-i2v-deep-research-source-map.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "source_license_evidence_missing",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "01-notes/lowmod-ab-rounds.md",
+      "media_type": "text/markdown",
+      "size_bytes": 3097,
+      "source_sha256": "969d3e8138d1907a7e9b5680b8b59767a57577adaf316359596fabd301842cd5",
+      "source_id": "seedance-i2v:source:969d3e8138d1907a7e9b5680b8b59767a57577adaf316359596fabd301842cd5",
+      "package_id": "seedance-i2v:package:969d3e8138d1907a7e9b5680b8b59767a57577adaf316359596fabd301842cd5",
+      "source_class_id": "c1_operator_local_empirical_text",
+      "topic_id": "ark_lowmod_controlled_ab",
+      "card_role": "relation_card",
+      "risk_rank": 13,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "Experiment provenance is documented, but the local embedding and derived-summary permissions are not explicit or hash-bound.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "02-sources/lowmod-ab-provenance.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "02-sources/lowmod-ab-provenance.md",
+      "media_type": "text/markdown",
+      "size_bytes": 2738,
+      "source_sha256": "c107b475036375034f7f37ff33402beef9557ccc50289273571a26ca3e7b8ce6",
+      "source_id": "seedance-i2v:source:c107b475036375034f7f37ff33402beef9557ccc50289273571a26ca3e7b8ce6",
+      "package_id": "seedance-i2v:package:c107b475036375034f7f37ff33402beef9557ccc50289273571a26ca3e7b8ce6",
+      "source_class_id": "c1_operator_local_empirical_text",
+      "topic_id": "research_provenance",
+      "card_role": "source_card",
+      "risk_rank": 10,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "The provenance map identifies source artifacts, but it does not state that the operator or a rightsholder grants embedding or derived-summary permission.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "02-sources/lowmod-ab-provenance.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "02-sources/seedance-i2v-deep-research-source-map.md",
+      "media_type": "text/markdown",
+      "size_bytes": 6289,
+      "source_sha256": "4b4409094156d4ec734946b6efb3ed1d81960eea75e8819ae23a3fc9adc57990",
+      "source_id": "seedance-i2v:source:4b4409094156d4ec734946b6efb3ed1d81960eea75e8819ae23a3fc9adc57990",
+      "package_id": "seedance-i2v:package:4b4409094156d4ec734946b6efb3ed1d81960eea75e8819ae23a3fc9adc57990",
+      "source_class_id": "c2_notebooklm_web_derived_text",
+      "topic_id": "research_provenance",
+      "card_role": "source_card",
+      "risk_rank": 11,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "The map records web URLs and notebook provenance but not the source licenses, captured bytes, or local-use grants.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "02-sources/seedance-i2v-deep-research-source-map.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "source_license_evidence_missing",
+        "source_capture_hashes_missing",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "03-assets/control_arms.png",
+      "media_type": "image/png",
+      "size_bytes": 826129,
+      "source_sha256": "c2f097cb4595ac91b3c8edecbd8830682ae2dca58888d33c00803af851622788",
+      "source_id": "seedance-i2v:source:c2f097cb4595ac91b3c8edecbd8830682ae2dca58888d33c00803af851622788",
+      "package_id": "seedance-i2v:package:c2f097cb4595ac91b3c8edecbd8830682ae2dca58888d33c00803af851622788",
+      "source_class_id": "c4_modelark_generated_visual",
+      "topic_id": "ark_lowmod_controlled_ab",
+      "card_role": "visual_evidence_card",
+      "risk_rank": 9,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "The PNG matches the declared experiment output, but provider output-use terms and registered-asset or likeness attestations are not preserved.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "02-sources/lowmod-ab-provenance.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "generated_output_use_terms_missing",
+        "asset_or_likeness_attestation_missing",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "03-assets/e3_A_strip.png",
+      "media_type": "image/png",
+      "size_bytes": 417906,
+      "source_sha256": "87f9a31f61b5971d26ef8ced7c2b86cb6dbfde8f42610df4d8bc476dc1816f82",
+      "source_id": "seedance-i2v:source:87f9a31f61b5971d26ef8ced7c2b86cb6dbfde8f42610df4d8bc476dc1816f82",
+      "package_id": "seedance-i2v:package:87f9a31f61b5971d26ef8ced7c2b86cb6dbfde8f42610df4d8bc476dc1816f82",
+      "source_class_id": "c4_modelark_generated_visual",
+      "topic_id": "ark_lowmod_controlled_ab",
+      "card_role": "visual_evidence_card",
+      "risk_rank": 7,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "The PNG matches the declared experiment output, but provider output-use terms and registered-asset or likeness attestations are not preserved.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "02-sources/lowmod-ab-provenance.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "generated_output_use_terms_missing",
+        "asset_or_likeness_attestation_missing",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "03-assets/e4_decisive.png",
+      "media_type": "image/png",
+      "size_bytes": 823665,
+      "source_sha256": "2dd77fb5695937effeae206016937f1812796d170bdf966d3f8b388d4a9ae2e4",
+      "source_id": "seedance-i2v:source:2dd77fb5695937effeae206016937f1812796d170bdf966d3f8b388d4a9ae2e4",
+      "package_id": "seedance-i2v:package:2dd77fb5695937effeae206016937f1812796d170bdf966d3f8b388d4a9ae2e4",
+      "source_class_id": "c4_modelark_generated_visual",
+      "topic_id": "ark_lowmod_controlled_ab",
+      "card_role": "visual_evidence_card",
+      "risk_rank": 8,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "The PNG matches the declared experiment output, but provider output-use terms and registered-asset or likeness attestations are not preserved.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "02-sources/lowmod-ab-provenance.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "generated_output_use_terms_missing",
+        "asset_or_likeness_attestation_missing",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "03-assets/r5_drogas.png",
+      "media_type": "image/png",
+      "size_bytes": 1230161,
+      "source_sha256": "a09e980288358ac2a83f24ef901f4ff0ad81ce73e5128a0aab8b5331df9c036b",
+      "source_id": "seedance-i2v:source:a09e980288358ac2a83f24ef901f4ff0ad81ce73e5128a0aab8b5331df9c036b",
+      "package_id": "seedance-i2v:package:a09e980288358ac2a83f24ef901f4ff0ad81ce73e5128a0aab8b5331df9c036b",
+      "source_class_id": "c4_modelark_generated_visual",
+      "topic_id": "ark_lowmod_controlled_ab",
+      "card_role": "visual_evidence_card",
+      "risk_rank": 6,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "The PNG matches the declared experiment output, but provider output-use terms and registered-asset or likeness attestations are not preserved.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "02-sources/lowmod-ab-provenance.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "generated_output_use_terms_missing",
+        "asset_or_likeness_attestation_missing",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "04-derived/chatgpt-connect/20260608T174553Z-seedance-i2v-production-upgrade-v4/0001-seedance-i2v-audit-card-v4.md",
+      "media_type": "text/markdown",
+      "size_bytes": 1787,
+      "source_sha256": "bd9b2c46454b6e4e53a8cc4864a8d76f095c7837aa945ca373eabe91923bb6de",
+      "source_id": "seedance-i2v:source:bd9b2c46454b6e4e53a8cc4864a8d76f095c7837aa945ca373eabe91923bb6de",
+      "package_id": "seedance-i2v:package:bd9b2c46454b6e4e53a8cc4864a8d76f095c7837aa945ca373eabe91923bb6de",
+      "source_class_id": "c3_chatgpt_connect_derived_text",
+      "topic_id": "retrieval_governance",
+      "card_role": "relation_card",
+      "risk_rank": 16,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "Bundle and promotion metadata are present, but neither input rights nor explicit local embedding and derived-summary grants are recorded.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "04-derived/chatgpt-connect/20260608T174553Z-seedance-i2v-production-upgrade-v4/0005-seedance-i2v-evidence-ledger-v4.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "input_rights_unproven",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "04-derived/chatgpt-connect/20260608T174553Z-seedance-i2v-production-upgrade-v4/0002-seedance-i2v-external-research-delta-v4.md",
+      "media_type": "text/markdown",
+      "size_bytes": 2472,
+      "source_sha256": "0f8bdec6adc1d3eaea39bd3792244d24fca94846bebaa2c31339bbfdd2c58510",
+      "source_id": "seedance-i2v:source:0f8bdec6adc1d3eaea39bd3792244d24fca94846bebaa2c31339bbfdd2c58510",
+      "package_id": "seedance-i2v:package:0f8bdec6adc1d3eaea39bd3792244d24fca94846bebaa2c31339bbfdd2c58510",
+      "source_class_id": "c3_chatgpt_connect_derived_text",
+      "topic_id": "video_model_current_state",
+      "card_role": "concept_card",
+      "risk_rank": 12,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "Bundle and promotion metadata are present, but neither input rights nor explicit local embedding and derived-summary grants are recorded.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "04-derived/chatgpt-connect/20260608T174553Z-seedance-i2v-production-upgrade-v4/0005-seedance-i2v-evidence-ledger-v4.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "input_rights_unproven",
+        "volatile_claim_review_required",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "04-derived/chatgpt-connect/20260608T174553Z-seedance-i2v-production-upgrade-v4/0003-seedance-i2v-motion-control-cheat-sheet-v4.md",
+      "media_type": "text/markdown",
+      "size_bytes": 1907,
+      "source_sha256": "9887227c916087b0e9edadfce0724642f3fa6ee677700f6c967ff673dc3817ca",
+      "source_id": "seedance-i2v:source:9887227c916087b0e9edadfce0724642f3fa6ee677700f6c967ff673dc3817ca",
+      "package_id": "seedance-i2v:package:9887227c916087b0e9edadfce0724642f3fa6ee677700f6c967ff673dc3817ca",
+      "source_class_id": "c3_chatgpt_connect_derived_text",
+      "topic_id": "i2v_motion_control",
+      "card_role": "craft_application_card",
+      "risk_rank": 14,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "Bundle and promotion metadata are present, but neither input rights nor explicit local embedding and derived-summary grants are recorded.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "04-derived/chatgpt-connect/20260608T174553Z-seedance-i2v-production-upgrade-v4/0005-seedance-i2v-evidence-ledger-v4.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "input_rights_unproven",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "04-derived/chatgpt-connect/20260608T174553Z-seedance-i2v-production-upgrade-v4/0004-seedance-i2v-micro-eval-v4.md",
+      "media_type": "text/markdown",
+      "size_bytes": 2025,
+      "source_sha256": "46d6f0807571582603649a26ebb16e5f5510038020ac638417d0c71d5da0768f",
+      "source_id": "seedance-i2v:source:46d6f0807571582603649a26ebb16e5f5510038020ac638417d0c71d5da0768f",
+      "package_id": "seedance-i2v:package:46d6f0807571582603649a26ebb16e5f5510038020ac638417d0c71d5da0768f",
+      "source_class_id": "c3_chatgpt_connect_derived_text",
+      "topic_id": "retrieval_governance",
+      "card_role": "retrieval_eval_card",
+      "risk_rank": 20,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "Bundle and promotion metadata are present, but neither input rights nor explicit local embedding and derived-summary grants are recorded.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "04-derived/chatgpt-connect/20260608T174553Z-seedance-i2v-production-upgrade-v4/0005-seedance-i2v-evidence-ledger-v4.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "input_rights_unproven",
+        "eval_only_not_apply_knowledge",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "04-derived/chatgpt-connect/20260608T174553Z-seedance-i2v-production-upgrade-v4/0005-seedance-i2v-evidence-ledger-v4.md",
+      "media_type": "text/markdown",
+      "size_bytes": 1767,
+      "source_sha256": "720167093ff703be088bb34bc7092d9cd9554a5e6acdcefadaa9c4ba9cad6e49",
+      "source_id": "seedance-i2v:source:720167093ff703be088bb34bc7092d9cd9554a5e6acdcefadaa9c4ba9cad6e49",
+      "package_id": "seedance-i2v:package:720167093ff703be088bb34bc7092d9cd9554a5e6acdcefadaa9c4ba9cad6e49",
+      "source_class_id": "c3_chatgpt_connect_derived_text",
+      "topic_id": "research_provenance",
+      "card_role": "source_card",
+      "risk_rank": 17,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "The ledger describes evidence relationships but contains no explicit input-rights or local-use authorization.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "04-derived/chatgpt-connect/20260608T174553Z-seedance-i2v-production-upgrade-v4/0005-seedance-i2v-evidence-ledger-v4.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "input_rights_unproven",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "04-derived/chatgpt-connect/20260609T051718Z-seedance-i2v-equalization-v6/0001-seedance-i2v-equalization-upgrade-v6.md",
+      "media_type": "text/markdown",
+      "size_bytes": 1214,
+      "source_sha256": "bdee8bec8e708b8c22f413bb5d5fd14f9129a4095c3164c8adaf2c64e5831727",
+      "source_id": "seedance-i2v:source:bdee8bec8e708b8c22f413bb5d5fd14f9129a4095c3164c8adaf2c64e5831727",
+      "package_id": "seedance-i2v:package:bdee8bec8e708b8c22f413bb5d5fd14f9129a4095c3164c8adaf2c64e5831727",
+      "source_class_id": "c3_chatgpt_connect_derived_text",
+      "topic_id": "video_model_current_state",
+      "card_role": "concept_card",
+      "risk_rank": 15,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "Bundle and promotion metadata are present, but neither input rights nor explicit local embedding and derived-summary grants are recorded.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "04-derived/chatgpt-connect/20260609T051718Z-seedance-i2v-equalization-v6/0003-seedance-i2v-evidence-ledger-v6.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "input_rights_unproven",
+        "volatile_claim_review_required",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "04-derived/chatgpt-connect/20260609T051718Z-seedance-i2v-equalization-v6/0002-seedance-i2v-equalization-micro-eval-v6.md",
+      "media_type": "text/markdown",
+      "size_bytes": 727,
+      "source_sha256": "355379313041cdd4a93d93a00463bbfa104239430404a2e2a971f18021c452a8",
+      "source_id": "seedance-i2v:source:355379313041cdd4a93d93a00463bbfa104239430404a2e2a971f18021c452a8",
+      "package_id": "seedance-i2v:package:355379313041cdd4a93d93a00463bbfa104239430404a2e2a971f18021c452a8",
+      "source_class_id": "c3_chatgpt_connect_derived_text",
+      "topic_id": "retrieval_governance",
+      "card_role": "retrieval_eval_card",
+      "risk_rank": 21,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "Bundle and promotion metadata are present, but neither input rights nor explicit local embedding and derived-summary grants are recorded.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "04-derived/chatgpt-connect/20260609T051718Z-seedance-i2v-equalization-v6/0003-seedance-i2v-evidence-ledger-v6.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "input_rights_unproven",
+        "eval_only_not_apply_knowledge",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "04-derived/chatgpt-connect/20260609T051718Z-seedance-i2v-equalization-v6/0003-seedance-i2v-evidence-ledger-v6.md",
+      "media_type": "text/markdown",
+      "size_bytes": 765,
+      "source_sha256": "5dc25ebabd2e6de136fcf0dbe026c460b412eef1a4d698e2d0e6fa8b21a8945d",
+      "source_id": "seedance-i2v:source:5dc25ebabd2e6de136fcf0dbe026c460b412eef1a4d698e2d0e6fa8b21a8945d",
+      "package_id": "seedance-i2v:package:5dc25ebabd2e6de136fcf0dbe026c460b412eef1a4d698e2d0e6fa8b21a8945d",
+      "source_class_id": "c3_chatgpt_connect_derived_text",
+      "topic_id": "research_provenance",
+      "card_role": "source_card",
+      "risk_rank": 18,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "The ledger describes evidence relationships but contains no explicit input-rights or local-use authorization.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "04-derived/chatgpt-connect/20260609T051718Z-seedance-i2v-equalization-v6/0003-seedance-i2v-evidence-ledger-v6.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "input_rights_unproven",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "04-derived/lowmod-content-axes-2026-08-01.md",
+      "media_type": "text/markdown",
+      "size_bytes": 6409,
+      "source_sha256": "eaf24fb5874f729b642a01f37db24e150e9d131ecad663bc2b968812cd28da8d",
+      "source_id": "seedance-i2v:source:eaf24fb5874f729b642a01f37db24e150e9d131ecad663bc2b968812cd28da8d",
+      "package_id": "seedance-i2v:package:eaf24fb5874f729b642a01f37db24e150e9d131ecad663bc2b968812cd28da8d",
+      "source_class_id": "c1_operator_local_empirical_text",
+      "topic_id": "ark_lowmod_controlled_ab",
+      "card_role": "concept_card",
+      "risk_rank": 4,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "The derived empirical map has a documented operator provenance chain, but no hash-bound record grants embedding or derived-summary use.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "01-notes/lowmod-ab-rounds.md",
+        "02-sources/lowmod-ab-provenance.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "04-derived/seedance-i2v-deep-research-2026-synthesis.md",
+      "media_type": "text/markdown",
+      "size_bytes": 44001,
+      "source_sha256": "4f273cf7f7165880c7d4901171e4e535d06c0c85c6bd6bda40fe662064ee983b",
+      "source_id": "seedance-i2v:source:4f273cf7f7165880c7d4901171e4e535d06c0c85c6bd6bda40fe662064ee983b",
+      "package_id": "seedance-i2v:package:4f273cf7f7165880c7d4901171e4e535d06c0c85c6bd6bda40fe662064ee983b",
+      "source_class_id": "c2_notebooklm_web_derived_text",
+      "topic_id": "video_model_current_state",
+      "card_role": "concept_card",
+      "risk_rank": 1,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "Notebook and web-source provenance are present, but licenses, capture hashes, and explicit local-use grants are absent.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "02-sources/seedance-i2v-deep-research-source-map.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "source_license_evidence_missing",
+        "source_capture_hashes_missing",
+        "volatile_claim_review_required",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "05-packs/lowmod-content-axes-pack.md",
+      "media_type": "text/markdown",
+      "size_bytes": 1992,
+      "source_sha256": "8a19aebb44b5e58856ff8ba73da8dfeb35116b3207a0e168c983439154dc0050",
+      "source_id": "seedance-i2v:source:8a19aebb44b5e58856ff8ba73da8dfeb35116b3207a0e168c983439154dc0050",
+      "package_id": "seedance-i2v:package:8a19aebb44b5e58856ff8ba73da8dfeb35116b3207a0e168c983439154dc0050",
+      "source_class_id": "c5_compiled_pack",
+      "topic_id": "ark_lowmod_controlled_ab",
+      "card_role": "craft_application_card",
+      "risk_rank": 5,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "The compiled pack inherits the unresolved rights status of its empirical and visual inputs.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "02-sources/lowmod-ab-provenance.md",
+        "04-derived/lowmod-content-axes-2026-08-01.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "upstream_rights_unresolved",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    },
+    {
+      "relative_path": "05-packs/seedance-i2v-core-pack.md",
+      "media_type": "text/markdown",
+      "size_bytes": 9527,
+      "source_sha256": "e888f61212e6ade0ccaa406e6e04a27c939a10ff46fe3ffb2e8133f167f76e2a",
+      "source_id": "seedance-i2v:source:e888f61212e6ade0ccaa406e6e04a27c939a10ff46fe3ffb2e8133f167f76e2a",
+      "package_id": "seedance-i2v:package:e888f61212e6ade0ccaa406e6e04a27c939a10ff46fe3ffb2e8133f167f76e2a",
+      "source_class_id": "c5_compiled_pack",
+      "topic_id": "i2v_operator_overview",
+      "card_role": "craft_application_card",
+      "risk_rank": 2,
+      "inventory_disposition": "blocked",
+      "rights_status": "unknown",
+      "rights_basis": "The compiled pack inherits unresolved rights and freshness risks from its web-derived, connect-derived, and operator-doctrine inputs.",
+      "permitted_local_uses": [],
+      "external_processing": false,
+      "allowed_providers": [],
+      "allowed_regions": [],
+      "allowed_source_derived_fields": [],
+      "evidence_refs": [
+        "01-notes/2026-06-26-gptimg2-seedance-i2v-doctrine.md",
+        "02-sources/seedance-i2v-deep-research-source-map.md",
+        "04-derived/seedance-i2v-deep-research-2026-synthesis.md"
+      ],
+      "evidence_predicates": {
+        "provenance_present": true,
+        "hash_bound_rights_record_present": false,
+        "rightsholder_authority_proven": false,
+        "local_embedding_permission_explicit": false,
+        "derived_summary_permission_explicit": false,
+        "external_provider_disclosure_permission_explicit": false,
+        "generated_output_use_terms_preserved": false,
+        "registered_asset_or_likeness_attestation_present": false
+      },
+      "rights_evidence_sha256": null,
+      "review_date": "2026-08-08",
+      "reviewer_id": "codex-p0-read-only-audit",
+      "apply_eligible": false,
+      "blocking_reasons": [
+        "rights_status_unknown",
+        "upstream_rights_unresolved",
+        "volatile_claim_review_required",
+        "local_embedding_permission_unproven",
+        "derived_summary_permission_unproven"
+      ]
+    }
+  ],
+  "value_contract": {
+    "contract_id": "seedance-i2v-value-20260808.v1",
+    "status": "blocked_pending_eligible_corpus_and_baseline",
+    "authored_from": "operator_facing_source_intent_only",
+    "hypothesis": "A rights-cleared curated subset should improve operator retrieval for motion control, keyframe strategy, continuity planning, evidence-bounded model selection, and controlled ModelArk moderation findings without increasing unsupported current claims or false evidence.",
+    "operator_workflows": [
+      "direct_an_image_to_video_shot",
+      "choose_first_frame_or_first_and_last_frame_control",
+      "plan_multi_shot_continuity",
+      "select_a_model_with_freshness_guardrails",
+      "interpret_modelark_lowmod_experiment_evidence",
+      "separate_measured_results_from_unexecuted_or_superseded_claims"
+    ],
+    "baseline": {
+      "snapshot_id": null,
+      "captured_at": null,
+      "routing_pass_count": null,
+      "answer_criteria_pass_count": null,
+      "negative_control_pass_count": null,
+      "irrelevant_hit_rate_at_5": null,
+      "estimated_cost_usd": null
+    },
+    "candidate": {
+      "certificate_id": null,
+      "evaluated_at": null,
+      "routing_pass_count": null,
+      "answer_criteria_pass_count": null,
+      "negative_control_pass_count": null,
+      "irrelevant_hit_rate_at_5": null,
+      "estimated_cost_usd": null
+    },
+    "candidate_evidence_ref": null,
+    "candidate_evidence_sha256": null,
+    "minimum_absolute_answer_pass_gain": 0.125,
+    "maximum_irrelevant_hit_rate_at_5": 0.2,
+    "maximum_incremental_eval_cost_usd": 0,
+    "mutation_gate_open": false
+  },
+  "holdout_contract": {
+    "contract_id": "seedance-i2v-independent-holdout-20260808.v1",
+    "authored_from": "operator_facing_source_intent_only",
+    "frozen_before_card_generation": true,
+    "generated_card_content_allowed": false,
+    "query_count": 8,
+    "negative_control_ids": [
+      "H7",
+      "H8"
+    ],
+    "thresholds": {
+      "topic_routing_pass_count_min": 8,
+      "answer_criteria_pass_count_min": 7,
+      "negative_control_pass_count_min": 2,
+      "unsupported_current_claims_max": 0,
+      "raw_source_body_leaks_max": 0,
+      "invented_evidence_claims_max": 0
+    },
+    "queries": [
+      {
+        "holdout_id": "H1",
+        "query": "Plan motion from a locked still.",
+        "expected_topic_ids": [
+          "i2v_motion_control",
+          "i2v_operator_overview"
+        ],
+        "answer_criteria": [
+          "separate look from movement",
+          "cover motion and constraints",
+          "avoid unsupported claims"
+        ],
+        "negative_control": false
+      },
+      {
+        "holdout_id": "H2",
+        "query": "When should an operator use first-frame-only conditioning instead of first-and-last-frame conditioning?",
+        "expected_topic_ids": [
+          "i2v_motion_control"
+        ],
+        "answer_criteria": [
+          "uses first-frame-only for an anchored start with an open motion outcome",
+          "uses first-and-last-frame for a controlled transition or required end state",
+          "does not present dual-frame conditioning as a universal solve"
+        ],
+        "negative_control": false
+      },
+      {
+        "holdout_id": "H3",
+        "query": "What continuity constraints should be planned before generating a multi-shot sequence or extending a scene?",
+        "expected_topic_ids": [
+          "i2v_motion_control",
+          "i2v_operator_overview"
+        ],
+        "answer_criteria": [
+          "covers identity, wardrobe, props, lighting, spatial anchors, camera, and timeline continuity",
+          "treats multi-shot generation as continuity planning rather than merely longer generation"
+        ],
+        "negative_control": false
+      },
+      {
+        "holdout_id": "H4",
+        "query": "How should an operator choose among video models for a shot without turning a dated comparison into permanent advice?",
+        "expected_topic_ids": [
+          "video_model_current_state",
+          "retrieval_governance"
+        ],
+        "answer_criteria": [
+          "separates stable directing doctrine from dated model state",
+          "requires a date and authoritative current evidence for volatile claims",
+          "abstains when current evidence is unavailable"
+        ],
+        "negative_control": false
+      },
+      {
+        "holdout_id": "H5",
+        "query": "Summarize the low-mod A/B.",
+        "expected_topic_ids": [
+          "ark_lowmod_controlled_ab"
+        ],
+        "answer_criteria": [
+          "name the measured variable",
+          "name rejected explanations",
+          "limit claims to the experiment"
+        ],
+        "negative_control": false
+      },
+      {
+        "holdout_id": "H6",
+        "query": "What evidence is required before making a causal moderation claim from a generation run?",
+        "expected_topic_ids": [
+          "ark_lowmod_controlled_ab",
+          "research_provenance"
+        ],
+        "answer_criteria": [
+          "requires a pre-registered prediction and controlled comparison",
+          "requires frame inspection and contamination accounting",
+          "requires result reconciliation and rejects API status alone as causal proof"
+        ],
+        "negative_control": false
+      },
+      {
+        "holdout_id": "H7",
+        "query": "What are the exact current capabilities, price, and release status of Seedance, Kling, Veo, Sora, and Runway today?",
+        "expected_topic_ids": [
+          "video_model_current_state",
+          "retrieval_governance"
+        ],
+        "answer_criteria": [
+          "routes exact current facts to dated authoritative evidence",
+          "abstains if that evidence is not available",
+          "does not repeat stale pack claims as current fact"
+        ],
+        "negative_control": true
+      },
+      {
+        "holdout_id": "H8",
+        "query": "Did the unexecuted instrument check prove the ModelArk pre-filter behavior?",
+        "expected_topic_ids": [
+          "ark_lowmod_controlled_ab",
+          "research_provenance"
+        ],
+        "answer_criteria": [
+          "states that the instrument check was never run",
+          "does not treat an unexecuted script as evidence",
+          "distinguishes a written test instrument from an observed result"
+        ],
+        "negative_control": true
+      }
+    ],
+    "digest_algorithm": "sha256",
+    "digest_scope": "canonical_json_of_thresholds_and_queries",
+    "contract_sha256": "9644d427c7be45246f3f3399b52ade4ae35584583e828e3e692f18a330e00c72"
+  },
+  "budget_contract": {
+    "contract_id": "seedance-i2v-budget-20260808.v1",
+    "status": "inactive_blocked",
+    "activation_allowed": false,
+    "blocked_by": [
+      "all_sources_rights_unknown",
+      "lightrag_capabilities_blocked",
+      "legacy_reconciliation_not_provable",
+      "value_baseline_not_captured"
+    ],
+    "currency": "USD",
+    "corpus_digest_sha256": "38ca2330651ce290da8d97b1d1cb8b2a11ce83161687013af32ac83ede6b40e3",
+    "operator_instruction_hash": null,
+    "issued_at": null,
+    "expires_at": null,
+    "provider_roles": [
+      {
+        "role": "extraction_and_merge",
+        "provider": "deepseek",
+        "model": "deepseek-v4-pro",
+        "rate_basis_status": "not_materialized",
+        "rate_unit": null,
+        "rate_amount": null,
+        "max_calls": 0,
+        "max_input_tokens": 0,
+        "max_output_tokens": 0
+      },
+      {
+        "role": "embeddings",
+        "provider": "voyage",
+        "model": "voyage-4-large",
+        "rate_basis_status": "not_materialized",
+        "rate_unit": null,
+        "rate_amount": null,
+        "max_calls": 0,
+        "max_input_tokens": 0,
+        "max_output_tokens": 0
+      },
+      {
+        "role": "retrieval_rerank",
+        "provider": "cohere",
+        "model": "rerank-v4.0-pro",
+        "rate_basis_status": "not_materialized",
+        "rate_unit": null,
+        "rate_amount": null,
+        "max_calls": 0,
+        "max_input_tokens": 0,
+        "max_output_tokens": 0
+      }
+    ],
+    "total_ceiling": 0,
+    "reservation_status": "not_created",
+    "source_derived_fields": [],
+    "external_processing": false,
+    "reactivation_requirements": [
+      "rights_clear_for_each_transmitted_source_and_field",
+      "provider_region_and_field_disclosure_match",
+      "lightrag_capability_audit_green",
+      "legacy_reconciliation_green",
+      "value_baseline_captured",
+      "nonzero_conservative_rate_basis_and_ceiling",
+      "corpus_bound_operator_instruction_hash",
+      "short_expiry"
+    ]
+  },
+  "capability_contract": {
+    "audit_mode": "read_only",
+    "lightrag": {
+      "status": "audited_blocked",
+      "required_capabilities": [
+        "authoritative_file_source_to_payload_hash_lookup",
+        "immutable_payload_hash_persistence",
+        "service_enforced_single_use_mutation_fencing",
+        "idle_and_settlement_status"
+      ],
+      "mutation_eligible": false
+    },
+    "knowledge_hub": {
+      "status": "audited_blocked",
+      "required_capabilities": [
+        "typed_import_dry_run",
+        "atomic_import_or_atomic_manifest_swap",
+        "server_enforced_single_use_authorization",
+        "kh_owned_gate_lease_or_independent_watchdog",
+        "crash_safe_gate_closure",
+        "restart_request_and_status",
+        "post_restart_read_only_health",
+        "historical_id_and_unordered_edge_preservation"
+      ],
+      "promotion_eligible": false
+    }
+  },
+  "audit_contract": {
+    "mode": "read_only",
+    "provider_calls": 0,
+    "source_writes": 0,
+    "datastore_writes": 0,
+    "inventory_verified": true,
+    "rights_certification": "blocked_all_sources_unknown",
+    "legacy_reconciliation": "not_provable",
+    "leak_scan": "not_run",
+    "p0_status": "blocked_no_mutation",
+    "p1_status": "no_go"
+  }
+}

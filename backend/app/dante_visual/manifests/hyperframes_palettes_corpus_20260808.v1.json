@@ -1,0 +1,979 @@
+{
+  "audit_contract": {
+    "datastore_writes": 0,
+    "inventory_verified": true,
+    "leak_scan": "green",
+    "legacy_reconciliation": "blocked",
+    "mode": "read_only",
+    "p0_status": "ready_for_p0",
+    "p1_status": "no_go",
+    "provider_calls": 0,
+    "rights_certification": "green",
+    "source_writes": 0
+  },
+  "budget_contract": {
+    "activation_allowed": false,
+    "blocked_by": [
+      "provider_rate_basis_not_materialized",
+      "operator_budget_reservation_absent"
+    ],
+    "contract_id": "hyperframes-palettes-budget-20260808",
+    "corpus_digest_sha256": "e77e9bd5444e9b3df16db85c32a848e26621d3cad1d94d859e2b01415d97299c",
+    "currency": "USD",
+    "expires_at": null,
+    "external_processing": false,
+    "issued_at": null,
+    "operator_instruction_hash": "",
+    "provider_roles": [
+      {
+        "max_calls": 0,
+        "max_input_tokens": 0,
+        "max_output_tokens": 0,
+        "model": "deepseek-v4-pro",
+        "provider": "deepseek",
+        "rate_amount": 0.0,
+        "rate_basis_status": "unmaterialized",
+        "rate_unit": "",
+        "role": "extraction_and_merge"
+      },
+      {
+        "max_calls": 0,
+        "max_input_tokens": 0,
+        "max_output_tokens": 0,
+        "model": "voyage-4-large",
+        "provider": "voyage",
+        "rate_amount": 0.0,
+        "rate_basis_status": "unmaterialized",
+        "rate_unit": "",
+        "role": "embeddings"
+      },
+      {
+        "max_calls": 0,
+        "max_input_tokens": 0,
+        "max_output_tokens": 0,
+        "model": "rerank-v4.0-pro",
+        "provider": "cohere",
+        "rate_amount": 0.0,
+        "rate_basis_status": "unmaterialized",
+        "rate_unit": "",
+        "role": "retrieval_rerank"
+      }
+    ],
+    "reactivation_requirements": [
+      "materialize_current_provider_rates",
+      "bind_an_expiring_operator_reservation_to_this_corpus_digest"
+    ],
+    "reservation_status": "not_reserved",
+    "source_derived_fields": [
+      "heading_seeds",
+      "relationships",
+      "summary",
+      "title"
+    ],
+    "status": "inactive",
+    "total_ceiling": 0.0
+  },
+  "capability_contract": {
+    "audit_mode": "read_only_negative_audit",
+    "knowledge_hub": {
+      "promotion_eligible": false,
+      "required_capabilities": [
+        "knowledge_hub.atomic_import",
+        "knowledge_hub.gate_close",
+        "knowledge_hub.restart",
+        "knowledge_hub.single_use_capability",
+        "knowledge_hub.watchdog_or_lease_ttl"
+      ],
+      "status": "blocked"
+    },
+    "lightrag": {
+      "mutation_eligible": false,
+      "required_capabilities": [
+        "lightrag.authoritative_payload_hash_lookup",
+        "lightrag.legacy_identity_reconciliation",
+        "lightrag.service_enforced_fencing"
+      ],
+      "status": "blocked"
+    }
+  },
+  "corpus_id": "hyperframes-palettes-20260808",
+  "evidence_generation": {
+    "authority_ref": "evidence/hyperframes-palettes/authority.json",
+    "authority_sha256": "164e371ecfe9bea291efb76e752205dfd02fc5ded9ea60389d78ce1850f36db9",
+    "executable_tree_sha256": "a171d1d50d0e45b7ae9bfaea738148927a367371b3dc797d87fc6ca97c44cac1",
+    "generation_id": "hyperframes-palettes-20260808-v2",
+    "holdout_ref": "evidence/hyperframes-palettes/holdout.json",
+    "holdout_sha256": "cff1fb642bfdf5540f099c9a2eefc92ab0823e61d9cc0002056696af29a356a6",
+    "license_ref": "evidence/hyperframes-palettes/LICENSE",
+    "license_sha256": "4259155fb06f127687ee7b0a8a3682d45132db0f2da26cbc0b7a2d1e796436b8",
+    "origin_observation_ref": "evidence/hyperframes-palettes/origin-observation.json",
+    "origin_observation_sha256": "20d07f53e35026e4ea09185f4745267bda88296c295c606e16d7d0d2c171a261",
+    "rights_records": [
+      {
+        "artifact_ref": "evidence/hyperframes-palettes/rights-bold-energetic.json",
+        "sha256": "5e4f51de2d66969a5b52780c1609522ea9d19c80e08e2f4cb7ba48c457c58b6c",
+        "source_id": "hyperframes-palettes:source:17bc6b7889302151b4e5c84c0c6a33df676647078011d9decb2b68810e3baa7f"
+      },
+      {
+        "artifact_ref": "evidence/hyperframes-palettes/rights-clean-corporate.json",
+        "sha256": "b3c5e6b3976dacd2234d8b16504a8ca9a451ede89f09485c929c005e7f0ccf26",
+        "source_id": "hyperframes-palettes:source:d0c8c86838abb77985609629afe600d0ca365eccd835820f309959e8a85cba9d"
+      },
+      {
+        "artifact_ref": "evidence/hyperframes-palettes/rights-dark-premium.json",
+        "sha256": "dcb1f6e5c2c9ca01b0088ab25e3045035a6b9ac7b63224d3f0f8a1ab6e154fda",
+        "source_id": "hyperframes-palettes:source:abfecbf7e8dca3b674376590a0467aac3e13b2135022ae4ec519c4b27c2303b1"
+      },
+      {
+        "artifact_ref": "evidence/hyperframes-palettes/rights-jewel-rich.json",
+        "sha256": "29930ff2b5275de5533541517343892c892822a5c29986c1da8062a1126a9c14",
+        "source_id": "hyperframes-palettes:source:17c8f7506469f66bca4e27ef78c19f0bcbf250f88fe840e3043816b7041c4fc5"
+      },
+      {
+        "artifact_ref": "evidence/hyperframes-palettes/rights-monochrome.json",
+        "sha256": "37cceba4becd7945b0c092fbdc7d2d93110257587be8c2d49d8b49f72df33bce",
+        "source_id": "hyperframes-palettes:source:fe8586f6d70707098859063bdef34d68084f02cf7d5aaa436d4c9915a7ae3748"
+      },
+      {
+        "artifact_ref": "evidence/hyperframes-palettes/rights-nature-earth.json",
+        "sha256": "7911d53c3572b96fce433cef4ca405573f39f9c40fd37a90c767f1b60e2e67a3",
+        "source_id": "hyperframes-palettes:source:9710549b17487787fef3c7cb459cfd6e4ac28c1593bf471fcf55a3b4e546beed"
+      },
+      {
+        "artifact_ref": "evidence/hyperframes-palettes/rights-neon-electric.json",
+        "sha256": "729a3db32dce9974d91d51c0febe6377078130050a28b3129a9f15bd4f33b530",
+        "source_id": "hyperframes-palettes:source:35225bf8d2cd37223e88e0bc59b0a96bc8adeda7225389b3df97b675cfd33dfb"
+      },
+      {
+        "artifact_ref": "evidence/hyperframes-palettes/rights-pastel-soft.json",
+        "sha256": "552a8842407cb38c0270e90b75d7cbd5c1208d542b1549498c0bc2063002f65e",
+        "source_id": "hyperframes-palettes:source:ed4e25bb5f4953c002e55a53320249621437e03b5a11d43e3c1bd32c869b6d95"
+      },
+      {
+        "artifact_ref": "evidence/hyperframes-palettes/rights-warm-editorial.json",
+        "sha256": "43022cefa741dc5b8f3fb7e5a20344897055a128bbf8dfa7e68d91d8095ee32f",
+        "source_id": "hyperframes-palettes:source:c467ee3cc0bbf4b2bedccc8106e18293b8a06dbac8f092b10300492da0e0559a"
+      }
+    ],
+    "runtime_capabilities_ref": "governed_runtime_capabilities_20260808.v2.json",
+    "runtime_capabilities_sha256": "eb216ac4e360807f5f3f28145e89f9ba84c72d8622ed386dccdcd769ac942b98",
+    "subject_revision": "f763c5481744ac775a4685f2af31148254b529d2",
+    "trust_registry_ref": "governed_rights_trust_roots.v1.json",
+    "trust_registry_sha256": "af050a9c202f4f9bfd7b9b4bd25a8641745f0b3bb528b73808602eb9094c0c8d",
+    "value_baseline_ref": "evidence/hyperframes-palettes/value-baseline.json",
+    "value_baseline_sha256": "e9212d305fcc6349f1cba6cb9b46e63d4e49c463e21c8fca036288c456ca838d"
+  },
+  "holdout_contract": {
+    "authored_from": "independent_operator_workflows_before_card_generation",
+    "contract_id": "hyperframes-palettes-holdout-20260808",
+    "contract_sha256": "5866518d046a8825ad8868e98cd8c9e6ffe76706fc83dce550bf87ce525359cf",
+    "digest_algorithm": "sha256",
+    "digest_scope": "canonical_json_of_thresholds_and_queries",
+    "frozen_before_card_generation": true,
+    "generated_card_content_allowed": false,
+    "negative_control_ids": [
+      "H5"
+    ],
+    "queries": [
+      {
+        "answer_criteria": [
+          "Routes to clean-corporate.",
+          "Explains information hierarchy and effortless scanning.",
+          "Uses measured accents rather than spectacle.",
+          "Does not reproduce source color values."
+        ],
+        "expected_topic_ids": [
+          "professional-clarity"
+        ],
+        "holdout_id": "H1",
+        "negative_control": false,
+        "query": "Which palette direction should organize a board update containing dense charts, compact labels, and a measured executive tone?"
+      },
+      {
+        "answer_criteria": [
+          "Routes the esports case to neon-electric.",
+          "Routes the cheerful launch case to bold-energetic.",
+          "Distinguishes luminous digital intensity from general visual momentum."
+        ],
+        "expected_topic_ids": [
+          "chromatic-expression"
+        ],
+        "holdout_id": "H2",
+        "negative_control": false,
+        "query": "Contrast a dark-screen esports package with a cheerful launch film and choose the best palette direction for each."
+      },
+      {
+        "answer_criteria": [
+          "Routes the gala to jewel-rich.",
+          "Routes the software interface to dark-premium.",
+          "Distinguishes opulence from controlled low-light polish."
+        ],
+        "expected_topic_ids": [
+          "chromatic-expression",
+          "cinematic-luxury"
+        ],
+        "holdout_id": "H3",
+        "negative_control": false,
+        "query": "Choose separate palette directions for an ornate prestige gala and a polished luxury software interface."
+      },
+      {
+        "answer_criteria": [
+          "Routes the map to monochrome.",
+          "Routes the conservation landscape to nature-earth.",
+          "Routes gentle skincare to pastel-soft.",
+          "Routes the documentary to warm-editorial.",
+          "Provides concise rationale without exposing source bodies."
+        ],
+        "expected_topic_ids": [
+          "tonal-restraint",
+          "organic-grounding",
+          "chromatic-expression",
+          "editorial-storytelling"
+        ],
+        "holdout_id": "H4",
+        "negative_control": false,
+        "query": "Match palette directions to a type-led map with minimal hue, a conservation landscape, gentle skincare, and an intimate magazine documentary."
+      },
+      {
+        "answer_criteria": [
+          "Abstains from inventing a flag.",
+          "States that palette evidence does not answer runtime configuration questions.",
+          "Routes the operator to CLI or runtime documentation."
+        ],
+        "expected_topic_ids": [],
+        "holdout_id": "H5",
+        "negative_control": true,
+        "query": "Which GPU worker concurrency CLI option should be used for a 4K export?"
+      }
+    ],
+    "query_count": 5,
+    "thresholds": {
+      "answer_criteria_pass_count_min": 5,
+      "invented_evidence_claims_max": 0,
+      "negative_control_pass_count_min": 1,
+      "raw_source_body_leaks_max": 0,
+      "topic_routing_pass_count_min": 5,
+      "unsupported_current_claims_max": 0
+    }
+  },
+  "inventory_contract": {
+    "audit_digest_sha256": "e77e9bd5444e9b3df16db85c32a848e26621d3cad1d94d859e2b01415d97299c",
+    "digest_input_format": "relative_path<TAB>size_bytes<TAB>source_sha256<LF>",
+    "expected_file_count": 9,
+    "expected_markdown_count": 9,
+    "expected_png_count": 0,
+    "expected_total_size_bytes": 3646,
+    "hash_algorithm": "sha256",
+    "sort_key": "relative_path"
+  },
+  "policy_status": "frozen",
+  "policy_version": "2026-08-08.v2",
+  "schema_version": "dantedash.governed_corpus_policy.v2",
+  "source_classes": [
+    {
+      "adjudication_reason": "The reviewed deterministic policy resolves every listed source to the pinned Apache-2.0 repository subject without a narrower override.",
+      "current_rights_status": "verified_clear",
+      "description": "Pinned Markdown palette guidance covered by one reviewed repository license policy and exact Git object identities.",
+      "evidence_available": "A fresh official Git-data closure, exact local byte snapshots, and repository-root Apache-2.0 coverage are hash-bound.",
+      "expected_member_count": 9,
+      "external_processing": true,
+      "permitted_local_uses": [
+        "derived_summary",
+        "local_embedding"
+      ],
+      "required_true_predicates": [
+        "derived_summary_permission_explicit",
+        "external_provider_disclosure_permission_explicit",
+        "hash_bound_rights_record_present",
+        "local_embedding_permission_explicit",
+        "provenance_present",
+        "rightsholder_authority_proven"
+      ],
+      "source_class_id": "pinned-apache2-palette-markdown"
+    }
+  ],
+  "source_root_contract": {
+    "allow_symlinks": false,
+    "allow_unlisted_files": false,
+    "allowed_extensions": [
+      ".md",
+      ".png"
+    ],
+    "persist_source_root": false,
+    "read_only": true,
+    "relative_path_base": "runtime_source_root",
+    "runtime_argument_required": true
+  },
+  "sources": [
+    {
+      "allowed_providers": [
+        "cohere",
+        "deepseek",
+        "voyage"
+      ],
+      "allowed_regions": [
+        "global"
+      ],
+      "allowed_source_derived_fields": [
+        "heading_seeds",
+        "relationships",
+        "summary",
+        "title"
+      ],
+      "apply_eligible": true,
+      "blocking_reasons": [],
+      "card_role": "source_card",
+      "declared_summary": "A vivid, high-contrast color system for moments that need immediate visual momentum, strong calls to action, and an upbeat sense of motion.",
+      "evidence_predicates": {
+        "derived_summary_permission_explicit": true,
+        "external_provider_disclosure_permission_explicit": true,
+        "hash_bound_rights_record_present": true,
+        "local_embedding_permission_explicit": true,
+        "provenance_present": true,
+        "rightsholder_authority_proven": true
+      },
+      "evidence_refs": [
+        "evidence/hyperframes-palettes/rights-bold-energetic.json"
+      ],
+      "external_processing": true,
+      "heading_seeds": [
+        "Impact Color",
+        "Momentum Accents",
+        "High-Contrast Combinations"
+      ],
+      "inventory_disposition": "selected",
+      "media_type": "text/markdown",
+      "package_id": "hyperframes-palettes:package:17bc6b7889302151b4e5c84c0c6a33df676647078011d9decb2b68810e3baa7f",
+      "permitted_local_uses": [
+        "derived_summary",
+        "local_embedding"
+      ],
+      "relationships": [
+        "supports:palette-selection",
+        "belongs-to:chromatic-expression"
+      ],
+      "relative_path": "bold-energetic.md",
+      "review_date": "2026-08-08",
+      "reviewer_id": "dantedash.apache-2.0-path-coverage.v1",
+      "rights_basis": "Pinned Git blob identity and repository-root Apache-2.0 coverage were verified by the reviewed deterministic policy.",
+      "rights_evidence_sha256": "5e4f51de2d66969a5b52780c1609522ea9d19c80e08e2f4cb7ba48c457c58b6c",
+      "rights_status": "verified_clear",
+      "risk_rank": 4,
+      "size_bytes": 417,
+      "source_class_id": "pinned-apache2-palette-markdown",
+      "source_id": "hyperframes-palettes:source:17bc6b7889302151b4e5c84c0c6a33df676647078011d9decb2b68810e3baa7f",
+      "source_sha256": "17bc6b7889302151b4e5c84c0c6a33df676647078011d9decb2b68810e3baa7f",
+      "title": "Bold Momentum",
+      "topic_id": "chromatic-expression"
+    },
+    {
+      "allowed_providers": [
+        "cohere",
+        "deepseek",
+        "voyage"
+      ],
+      "allowed_regions": [
+        "global"
+      ],
+      "allowed_source_derived_fields": [
+        "heading_seeds",
+        "relationships",
+        "summary",
+        "title"
+      ],
+      "apply_eligible": true,
+      "blocking_reasons": [],
+      "card_role": "source_card",
+      "declared_summary": "A disciplined neutral-and-accent system for information-heavy frames where hierarchy, credibility, and effortless scanning matter more than spectacle.",
+      "evidence_predicates": {
+        "derived_summary_permission_explicit": true,
+        "external_provider_disclosure_permission_explicit": true,
+        "hash_bound_rights_record_present": true,
+        "local_embedding_permission_explicit": true,
+        "provenance_present": true,
+        "rightsholder_authority_proven": true
+      },
+      "evidence_refs": [
+        "evidence/hyperframes-palettes/rights-clean-corporate.json"
+      ],
+      "external_processing": true,
+      "heading_seeds": [
+        "Information Hierarchy",
+        "Neutral Foundations",
+        "Controlled Accent"
+      ],
+      "inventory_disposition": "selected",
+      "media_type": "text/markdown",
+      "package_id": "hyperframes-palettes:package:d0c8c86838abb77985609629afe600d0ca365eccd835820f309959e8a85cba9d",
+      "permitted_local_uses": [
+        "derived_summary",
+        "local_embedding"
+      ],
+      "relationships": [
+        "supports:palette-selection",
+        "belongs-to:professional-clarity"
+      ],
+      "relative_path": "clean-corporate.md",
+      "review_date": "2026-08-08",
+      "reviewer_id": "dantedash.apache-2.0-path-coverage.v1",
+      "rights_basis": "Pinned Git blob identity and repository-root Apache-2.0 coverage were verified by the reviewed deterministic policy.",
+      "rights_evidence_sha256": "b3c5e6b3976dacd2234d8b16504a8ca9a451ede89f09485c929c005e7f0ccf26",
+      "rights_status": "verified_clear",
+      "risk_rank": 5,
+      "size_bytes": 410,
+      "source_class_id": "pinned-apache2-palette-markdown",
+      "source_id": "hyperframes-palettes:source:d0c8c86838abb77985609629afe600d0ca365eccd835820f309959e8a85cba9d",
+      "source_sha256": "d0c8c86838abb77985609629afe600d0ca365eccd835820f309959e8a85cba9d",
+      "title": "Structured Clarity",
+      "topic_id": "professional-clarity"
+    },
+    {
+      "allowed_providers": [
+        "cohere",
+        "deepseek",
+        "voyage"
+      ],
+      "allowed_regions": [
+        "global"
+      ],
+      "allowed_source_derived_fields": [
+        "heading_seeds",
+        "relationships",
+        "summary",
+        "title"
+      ],
+      "apply_eligible": true,
+      "blocking_reasons": [],
+      "card_role": "source_card",
+      "declared_summary": "A low-luminance palette family that creates polished depth, controlled drama, and selective highlights for elevated, screen-led storytelling.",
+      "evidence_predicates": {
+        "derived_summary_permission_explicit": true,
+        "external_provider_disclosure_permission_explicit": true,
+        "hash_bound_rights_record_present": true,
+        "local_embedding_permission_explicit": true,
+        "provenance_present": true,
+        "rightsholder_authority_proven": true
+      },
+      "evidence_refs": [
+        "evidence/hyperframes-palettes/rights-dark-premium.json"
+      ],
+      "external_processing": true,
+      "heading_seeds": [
+        "Low-Light Structure",
+        "Selective Highlights",
+        "Refined Contrast"
+      ],
+      "inventory_disposition": "selected",
+      "media_type": "text/markdown",
+      "package_id": "hyperframes-palettes:package:abfecbf7e8dca3b674376590a0467aac3e13b2135022ae4ec519c4b27c2303b1",
+      "permitted_local_uses": [
+        "derived_summary",
+        "local_embedding"
+      ],
+      "relationships": [
+        "supports:palette-selection",
+        "belongs-to:cinematic-luxury"
+      ],
+      "relative_path": "dark-premium.md",
+      "review_date": "2026-08-08",
+      "reviewer_id": "dantedash.apache-2.0-path-coverage.v1",
+      "rights_basis": "Pinned Git blob identity and repository-root Apache-2.0 coverage were verified by the reviewed deterministic policy.",
+      "rights_evidence_sha256": "dcb1f6e5c2c9ca01b0088ab25e3045035a6b9ac7b63224d3f0f8a1ab6e154fda",
+      "rights_status": "verified_clear",
+      "risk_rank": 6,
+      "size_bytes": 389,
+      "source_class_id": "pinned-apache2-palette-markdown",
+      "source_id": "hyperframes-palettes:source:abfecbf7e8dca3b674376590a0467aac3e13b2135022ae4ec519c4b27c2303b1",
+      "source_sha256": "abfecbf7e8dca3b674376590a0467aac3e13b2135022ae4ec519c4b27c2303b1",
+      "title": "Controlled Depth",
+      "topic_id": "cinematic-luxury"
+    },
+    {
+      "allowed_providers": [
+        "cohere",
+        "deepseek",
+        "voyage"
+      ],
+      "allowed_regions": [
+        "global"
+      ],
+      "allowed_source_derived_fields": [
+        "heading_seeds",
+        "relationships",
+        "summary",
+        "title"
+      ],
+      "apply_eligible": true,
+      "blocking_reasons": [],
+      "card_role": "source_card",
+      "declared_summary": "A saturated, gem-toned palette family for ceremonial or prestige-led work that needs richness, warmth, and a more ornate visual presence.",
+      "evidence_predicates": {
+        "derived_summary_permission_explicit": true,
+        "external_provider_disclosure_permission_explicit": true,
+        "hash_bound_rights_record_present": true,
+        "local_embedding_permission_explicit": true,
+        "provenance_present": true,
+        "rightsholder_authority_proven": true
+      },
+      "evidence_refs": [
+        "evidence/hyperframes-palettes/rights-jewel-rich.json"
+      ],
+      "external_processing": true,
+      "heading_seeds": [
+        "Saturated Depth",
+        "Prestige Pairings",
+        "Rich Tonal Balance"
+      ],
+      "inventory_disposition": "selected",
+      "media_type": "text/markdown",
+      "package_id": "hyperframes-palettes:package:17c8f7506469f66bca4e27ef78c19f0bcbf250f88fe840e3043816b7041c4fc5",
+      "permitted_local_uses": [
+        "derived_summary",
+        "local_embedding"
+      ],
+      "relationships": [
+        "supports:palette-selection",
+        "belongs-to:chromatic-expression"
+      ],
+      "relative_path": "jewel-rich.md",
+      "review_date": "2026-08-08",
+      "reviewer_id": "dantedash.apache-2.0-path-coverage.v1",
+      "rights_basis": "Pinned Git blob identity and repository-root Apache-2.0 coverage were verified by the reviewed deterministic policy.",
+      "rights_evidence_sha256": "29930ff2b5275de5533541517343892c892822a5c29986c1da8062a1126a9c14",
+      "rights_status": "verified_clear",
+      "risk_rank": 7,
+      "size_bytes": 394,
+      "source_class_id": "pinned-apache2-palette-markdown",
+      "source_id": "hyperframes-palettes:source:17c8f7506469f66bca4e27ef78c19f0bcbf250f88fe840e3043816b7041c4fc5",
+      "source_sha256": "17c8f7506469f66bca4e27ef78c19f0bcbf250f88fe840e3043816b7041c4fc5",
+      "title": "Saturated Prestige",
+      "topic_id": "chromatic-expression"
+    },
+    {
+      "allowed_providers": [
+        "cohere",
+        "deepseek",
+        "voyage"
+      ],
+      "allowed_regions": [
+        "global"
+      ],
+      "allowed_source_derived_fields": [
+        "heading_seeds",
+        "relationships",
+        "summary",
+        "title"
+      ],
+      "apply_eligible": true,
+      "blocking_reasons": [],
+      "card_role": "source_card",
+      "declared_summary": "A restrained tonal system that puts composition, type, and contrast ahead of hue, supporting focused narratives with a deliberate visual voice.",
+      "evidence_predicates": {
+        "derived_summary_permission_explicit": true,
+        "external_provider_disclosure_permission_explicit": true,
+        "hash_bound_rights_record_present": true,
+        "local_embedding_permission_explicit": true,
+        "provenance_present": true,
+        "rightsholder_authority_proven": true
+      },
+      "evidence_refs": [
+        "evidence/hyperframes-palettes/rights-monochrome.json"
+      ],
+      "external_processing": true,
+      "heading_seeds": [
+        "Tonal Hierarchy",
+        "Type-Led Contrast",
+        "Reduced-Color Systems"
+      ],
+      "inventory_disposition": "selected",
+      "media_type": "text/markdown",
+      "package_id": "hyperframes-palettes:package:fe8586f6d70707098859063bdef34d68084f02cf7d5aaa436d4c9915a7ae3748",
+      "permitted_local_uses": [
+        "derived_summary",
+        "local_embedding"
+      ],
+      "relationships": [
+        "supports:palette-selection",
+        "belongs-to:tonal-restraint"
+      ],
+      "relative_path": "monochrome.md",
+      "review_date": "2026-08-08",
+      "reviewer_id": "dantedash.apache-2.0-path-coverage.v1",
+      "rights_basis": "Pinned Git blob identity and repository-root Apache-2.0 coverage were verified by the reviewed deterministic policy.",
+      "rights_evidence_sha256": "37cceba4becd7945b0c092fbdc7d2d93110257587be8c2d49d8b49f72df33bce",
+      "rights_status": "verified_clear",
+      "risk_rank": 1,
+      "size_bytes": 454,
+      "source_class_id": "pinned-apache2-palette-markdown",
+      "source_id": "hyperframes-palettes:source:fe8586f6d70707098859063bdef34d68084f02cf7d5aaa436d4c9915a7ae3748",
+      "source_sha256": "fe8586f6d70707098859063bdef34d68084f02cf7d5aaa436d4c9915a7ae3748",
+      "title": "Tonal Discipline",
+      "topic_id": "tonal-restraint"
+    },
+    {
+      "allowed_providers": [
+        "cohere",
+        "deepseek",
+        "voyage"
+      ],
+      "allowed_regions": [
+        "global"
+      ],
+      "allowed_source_derived_fields": [
+        "heading_seeds",
+        "relationships",
+        "summary",
+        "title"
+      ],
+      "apply_eligible": true,
+      "blocking_reasons": [],
+      "card_role": "source_card",
+      "declared_summary": "A grounded palette family built around botanical and mineral associations, suited to calm, tactile stories with a strong connection to place.",
+      "evidence_predicates": {
+        "derived_summary_permission_explicit": true,
+        "external_provider_disclosure_permission_explicit": true,
+        "hash_bound_rights_record_present": true,
+        "local_embedding_permission_explicit": true,
+        "provenance_present": true,
+        "rightsholder_authority_proven": true
+      },
+      "evidence_refs": [
+        "evidence/hyperframes-palettes/rights-nature-earth.json"
+      ],
+      "external_processing": true,
+      "heading_seeds": [
+        "Organic Grounding",
+        "Botanical Neutrals",
+        "Earthbound Accents"
+      ],
+      "inventory_disposition": "selected",
+      "media_type": "text/markdown",
+      "package_id": "hyperframes-palettes:package:9710549b17487787fef3c7cb459cfd6e4ac28c1593bf471fcf55a3b4e546beed",
+      "permitted_local_uses": [
+        "derived_summary",
+        "local_embedding"
+      ],
+      "relationships": [
+        "supports:palette-selection",
+        "belongs-to:organic-grounding"
+      ],
+      "relative_path": "nature-earth.md",
+      "review_date": "2026-08-08",
+      "reviewer_id": "dantedash.apache-2.0-path-coverage.v1",
+      "rights_basis": "Pinned Git blob identity and repository-root Apache-2.0 coverage were verified by the reviewed deterministic policy.",
+      "rights_evidence_sha256": "7911d53c3572b96fce433cef4ca405573f39f9c40fd37a90c767f1b60e2e67a3",
+      "rights_status": "verified_clear",
+      "risk_rank": 9,
+      "size_bytes": 399,
+      "source_class_id": "pinned-apache2-palette-markdown",
+      "source_id": "hyperframes-palettes:source:9710549b17487787fef3c7cb459cfd6e4ac28c1593bf471fcf55a3b4e546beed",
+      "source_sha256": "9710549b17487787fef3c7cb459cfd6e4ac28c1593bf471fcf55a3b4e546beed",
+      "title": "Grounded Ecology",
+      "topic_id": "organic-grounding"
+    },
+    {
+      "allowed_providers": [
+        "cohere",
+        "deepseek",
+        "voyage"
+      ],
+      "allowed_regions": [
+        "global"
+      ],
+      "allowed_source_derived_fields": [
+        "heading_seeds",
+        "relationships",
+        "summary",
+        "title"
+      ],
+      "apply_eligible": true,
+      "blocking_reasons": [],
+      "card_role": "source_card",
+      "declared_summary": "A luminous, high-voltage palette family for synthetic, after-dark, or youth-coded worlds where glow and contrast carry the visual energy.",
+      "evidence_predicates": {
+        "derived_summary_permission_explicit": true,
+        "external_provider_disclosure_permission_explicit": true,
+        "hash_bound_rights_record_present": true,
+        "local_embedding_permission_explicit": true,
+        "provenance_present": true,
+        "rightsholder_authority_proven": true
+      },
+      "evidence_refs": [
+        "evidence/hyperframes-palettes/rights-neon-electric.json"
+      ],
+      "external_processing": true,
+      "heading_seeds": [
+        "Luminous Contrast",
+        "Synthetic Energy",
+        "Night-Screen Color"
+      ],
+      "inventory_disposition": "selected",
+      "media_type": "text/markdown",
+      "package_id": "hyperframes-palettes:package:35225bf8d2cd37223e88e0bc59b0a96bc8adeda7225389b3df97b675cfd33dfb",
+      "permitted_local_uses": [
+        "derived_summary",
+        "local_embedding"
+      ],
+      "relationships": [
+        "supports:palette-selection",
+        "belongs-to:chromatic-expression"
+      ],
+      "relative_path": "neon-electric.md",
+      "review_date": "2026-08-08",
+      "reviewer_id": "dantedash.apache-2.0-path-coverage.v1",
+      "rights_basis": "Pinned Git blob identity and repository-root Apache-2.0 coverage were verified by the reviewed deterministic policy.",
+      "rights_evidence_sha256": "729a3db32dce9974d91d51c0febe6377078130050a28b3129a9f15bd4f33b530",
+      "rights_status": "verified_clear",
+      "risk_rank": 2,
+      "size_bytes": 380,
+      "source_class_id": "pinned-apache2-palette-markdown",
+      "source_id": "hyperframes-palettes:source:35225bf8d2cd37223e88e0bc59b0a96bc8adeda7225389b3df97b675cfd33dfb",
+      "source_sha256": "35225bf8d2cd37223e88e0bc59b0a96bc8adeda7225389b3df97b675cfd33dfb",
+      "title": "Electric Afterglow",
+      "topic_id": "chromatic-expression"
+    },
+    {
+      "allowed_providers": [
+        "cohere",
+        "deepseek",
+        "voyage"
+      ],
+      "allowed_regions": [
+        "global"
+      ],
+      "allowed_source_derived_fields": [
+        "heading_seeds",
+        "relationships",
+        "summary",
+        "title"
+      ],
+      "apply_eligible": true,
+      "blocking_reasons": [],
+      "card_role": "source_card",
+      "declared_summary": "A light, low-intensity palette family that supports approachable, gentle, and contemporary stories without demanding aggressive contrast.",
+      "evidence_predicates": {
+        "derived_summary_permission_explicit": true,
+        "external_provider_disclosure_permission_explicit": true,
+        "hash_bound_rights_record_present": true,
+        "local_embedding_permission_explicit": true,
+        "provenance_present": true,
+        "rightsholder_authority_proven": true
+      },
+      "evidence_refs": [
+        "evidence/hyperframes-palettes/rights-pastel-soft.json"
+      ],
+      "external_processing": true,
+      "heading_seeds": [
+        "Gentle Contrast",
+        "Airy Foundations",
+        "Soft Contemporary Color"
+      ],
+      "inventory_disposition": "selected",
+      "media_type": "text/markdown",
+      "package_id": "hyperframes-palettes:package:ed4e25bb5f4953c002e55a53320249621437e03b5a11d43e3c1bd32c869b6d95",
+      "permitted_local_uses": [
+        "derived_summary",
+        "local_embedding"
+      ],
+      "relationships": [
+        "supports:palette-selection",
+        "belongs-to:chromatic-expression"
+      ],
+      "relative_path": "pastel-soft.md",
+      "review_date": "2026-08-08",
+      "reviewer_id": "dantedash.apache-2.0-path-coverage.v1",
+      "rights_basis": "Pinned Git blob identity and repository-root Apache-2.0 coverage were verified by the reviewed deterministic policy.",
+      "rights_evidence_sha256": "552a8842407cb38c0270e90b75d7cbd5c1208d542b1549498c0bc2063002f65e",
+      "rights_status": "verified_clear",
+      "risk_rank": 3,
+      "size_bytes": 392,
+      "source_class_id": "pinned-apache2-palette-markdown",
+      "source_id": "hyperframes-palettes:source:ed4e25bb5f4953c002e55a53320249621437e03b5a11d43e3c1bd32c869b6d95",
+      "source_sha256": "ed4e25bb5f4953c002e55a53320249621437e03b5a11d43e3c1bd32c869b6d95",
+      "title": "Gentle Atmosphere",
+      "topic_id": "chromatic-expression"
+    },
+    {
+      "allowed_providers": [
+        "cohere",
+        "deepseek",
+        "voyage"
+      ],
+      "allowed_regions": [
+        "global"
+      ],
+      "allowed_source_derived_fields": [
+        "heading_seeds",
+        "relationships",
+        "summary",
+        "title"
+      ],
+      "apply_eligible": true,
+      "blocking_reasons": [],
+      "card_role": "source_card",
+      "declared_summary": "A warm, balanced palette family for human-centered narratives that need emotional texture, readable structure, and a crafted publication feel.",
+      "evidence_predicates": {
+        "derived_summary_permission_explicit": true,
+        "external_provider_disclosure_permission_explicit": true,
+        "hash_bound_rights_record_present": true,
+        "local_embedding_permission_explicit": true,
+        "provenance_present": true,
+        "rightsholder_authority_proven": true
+      },
+      "evidence_refs": [
+        "evidence/hyperframes-palettes/rights-warm-editorial.json"
+      ],
+      "external_processing": true,
+      "heading_seeds": [
+        "Human-Centered Warmth",
+        "Editorial Balance",
+        "Narrative Accents"
+      ],
+      "inventory_disposition": "selected",
+      "media_type": "text/markdown",
+      "package_id": "hyperframes-palettes:package:c467ee3cc0bbf4b2bedccc8106e18293b8a06dbac8f092b10300492da0e0559a",
+      "permitted_local_uses": [
+        "derived_summary",
+        "local_embedding"
+      ],
+      "relationships": [
+        "supports:palette-selection",
+        "belongs-to:editorial-storytelling"
+      ],
+      "relative_path": "warm-editorial.md",
+      "review_date": "2026-08-08",
+      "reviewer_id": "dantedash.apache-2.0-path-coverage.v1",
+      "rights_basis": "Pinned Git blob identity and repository-root Apache-2.0 coverage were verified by the reviewed deterministic policy.",
+      "rights_evidence_sha256": "43022cefa741dc5b8f3fb7e5a20344897055a128bbf8dfa7e68d91d8095ee32f",
+      "rights_status": "verified_clear",
+      "risk_rank": 8,
+      "size_bytes": 411,
+      "source_class_id": "pinned-apache2-palette-markdown",
+      "source_id": "hyperframes-palettes:source:c467ee3cc0bbf4b2bedccc8106e18293b8a06dbac8f092b10300492da0e0559a",
+      "source_sha256": "c467ee3cc0bbf4b2bedccc8106e18293b8a06dbac8f092b10300492da0e0559a",
+      "title": "Humanist Narrative",
+      "topic_id": "editorial-storytelling"
+    }
+  ],
+  "stage_contract": {
+    "full_apply": {
+      "remaining_source_paths": [
+        "monochrome.md",
+        "nature-earth.md"
+      ],
+      "requires_fresh_rehearsed_checkpoint": true,
+      "requires_independent_holdout": true,
+      "requires_zero_unresolved_conflicts_in_eligible_set": true
+    },
+    "gate_1": {
+      "cumulative_unique_source_count": 1,
+      "required_card_role": "source_card",
+      "selection_rule": "fixed_reviewed_stage_membership",
+      "source_paths": [
+        "clean-corporate.md"
+      ]
+    },
+    "gate_2": {
+      "cumulative_unique_source_count": 5,
+      "required_new_unique_source_count": 4,
+      "selection_rule": "fixed_reviewed_stage_membership",
+      "source_paths": [
+        "clean-corporate.md",
+        "bold-energetic.md",
+        "dark-premium.md",
+        "pastel-soft.md",
+        "warm-editorial.md"
+      ]
+    },
+    "gate_3": {
+      "existing_members_are_noop": true,
+      "minimum_new_sources": 2,
+      "minimum_relationship_patterns": 2,
+      "source_paths": [
+        "bold-energetic.md",
+        "jewel-rich.md",
+        "neon-electric.md",
+        "pastel-soft.md"
+      ],
+      "topic_id": "chromatic-expression"
+    }
+  },
+  "topics": [
+    {
+      "description": "Expressive color systems selected by intensity, saturation, and emotional energy.",
+      "expected_member_count": 4,
+      "membership_rule": "source.topic_id_exact_match",
+      "topic_id": "chromatic-expression"
+    },
+    {
+      "description": "Controlled low-light systems for polished, selective, screen-led emphasis.",
+      "expected_member_count": 1,
+      "membership_rule": "source.topic_id_exact_match",
+      "topic_id": "cinematic-luxury"
+    },
+    {
+      "description": "Warm systems for human narratives, publication structure, and emotional texture.",
+      "expected_member_count": 1,
+      "membership_rule": "source.topic_id_exact_match",
+      "topic_id": "editorial-storytelling"
+    },
+    {
+      "description": "Botanical and mineral systems for calm, tactile, place-oriented narratives.",
+      "expected_member_count": 1,
+      "membership_rule": "source.topic_id_exact_match",
+      "topic_id": "organic-grounding"
+    },
+    {
+      "description": "Neutral-led systems for dense information, hierarchy, and credible scanning.",
+      "expected_member_count": 1,
+      "membership_rule": "source.topic_id_exact_match",
+      "topic_id": "professional-clarity"
+    },
+    {
+      "description": "Hue-reduced systems that prioritize composition, typography, and tonal contrast.",
+      "expected_member_count": 1,
+      "membership_rule": "source.topic_id_exact_match",
+      "topic_id": "tonal-restraint"
+    }
+  ],
+  "value_contract": {
+    "authored_from": "read_only_dashboard_baseline_and_independent_metadata",
+    "baseline": {
+      "answer_criteria_pass_count": 0,
+      "captured_at": "2026-08-08T10:48:39Z",
+      "estimated_cost_usd": 0.0,
+      "irrelevant_hit_rate_at_5": 0.0,
+      "negative_control_pass_count": 0,
+      "routing_pass_count": 0,
+      "snapshot_id": "dantedash-phase0-search-20260808"
+    },
+    "candidate": {
+      "answer_criteria_pass_count": 5,
+      "certificate_id": "hyperframes-palettes-value-20260808",
+      "estimated_cost_usd": 0.0,
+      "evaluated_at": "2026-08-08T10:48:39Z",
+      "invented_evidence_claims": 0,
+      "irrelevant_hit_rate_at_5": 0.0,
+      "negative_control_pass_count": 1,
+      "raw_source_body_leaks": 0,
+      "routing_pass_count": 5,
+      "unsupported_current_claims": 0
+    },
+    "candidate_evidence_ref": "evidence/hyperframes-palettes/value-baseline.json",
+    "candidate_evidence_sha256": "e9212d305fcc6349f1cba6cb9b46e63d4e49c463e21c8fca036288c456ca838d",
+    "contract_id": "hyperframes-palettes-phase0-value-20260808",
+    "hypothesis": "The bounded palette corpus fills observed palette-routing gaps without introducing unsupported current claims or raw-body disclosure.",
+    "maximum_incremental_eval_cost_usd": 0.0,
+    "maximum_irrelevant_hit_rate_at_5": 0.0,
+    "minimum_absolute_answer_pass_gain": 0.8,
+    "mutation_gate_open": true,
+    "operator_workflows": [
+      "dense_board_update_palette_selection",
+      "contrasting_launch_and_esports_palette_selection",
+      "prestige_and_software_palette_selection",
+      "multi-brief_palette_routing",
+      "out_of_scope_runtime_question_abstention"
+    ],
+    "status": "frozen_green"
+  }
+}

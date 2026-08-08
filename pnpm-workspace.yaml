@@ -40,4 +40,5 @@ autoInstallPeers: true
 # Lockdown of which deps may run install/build scripts. msw is a transitive dev
 # dependency we don't use; its postinstall (service-worker setup) is not needed.
 allowBuilds:
+  electron: true
   msw: false

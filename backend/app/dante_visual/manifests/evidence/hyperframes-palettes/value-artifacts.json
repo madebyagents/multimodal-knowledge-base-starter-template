@@ -1,0 +1,9 @@
+{
+  "artifacts": [
+    {
+      "artifact_ref": "evidence/hyperframes-palettes/value-preflight.json",
+      "sha256": "9c74c7116befdbb8ae55945cc7df9f55dd868cbd2719a7a9fdc6560ed51d5f2a"
+    }
+  ],
+  "schema_version": "dantedash.governed_corpus_value_artifacts.v1"
+}

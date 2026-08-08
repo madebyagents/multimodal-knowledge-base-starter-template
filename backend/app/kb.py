@@ -1,41 +1,37 @@
-"""
-Multimodal Knowledge Base core.
+"""Multimodal Knowledge Base core.
 
 Stack:
-    Gemini Embedding 2 (gemini-embedding-2-preview)  - one model for text/image/PDF/video
-    LlamaIndex VectorStoreIndex                      - ingestion pipeline + query engine
-    ChromaDB (PersistentClient + ChromaVectorStore)  - local vector store
+    Voyage multimodal embeddings   - one shared vector space for text/images/video
+    ChromaDB persistent collection - local vector store
+    Cohere rerank                  - optional text-query reranking
 
 Design:
-    - Text is chunked and embedded through LlamaIndex's IngestionPipeline
-      (so users can extend with LlamaParse, semantic splitting, etc.).
-    - Images / PDFs / video frames are embedded directly via google-genai
-      (LlamaIndex's text-only embed interface can't accept raw bytes), then
-      inserted as TextNodes with a pre-computed `embedding` field. The vectors
-      live in the same Chroma collection - same dimensionality, same model -
-      so cross-modal retrieval just works.
-    - All embeddings are 768-dim (Matryoshka truncation - quality/cost balance).
+    - Text is chunked locally with LlamaIndex and embedded directly with Voyage.
+    - Images and video frames are embedded through Voyage multimodal base64 inputs.
+    - PDF pages are rendered to JPEG before embedding because Voyage documents
+      text, image, and video inputs for the multimodal endpoint, not raw PDFs.
+    - All vectors in this sidecar are 1024-dim by default, matching
+      voyage-multimodal-3.5's default output size.
 """
 from __future__ import annotations
 
 import io
-import os
+import logging
 import shutil
 import tempfile
+import time
 import uuid
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Callable, Iterator
+from typing import Any, Callable
 
 import chromadb
 import cv2
 import fitz  # PyMuPDF
+import httpx
 import numpy as np
-from google import genai
-from google.genai import types
-from llama_index.core import Settings, StorageContext, VectorStoreIndex
-from llama_index.core.ingestion import IngestionPipeline
+from llama_index.core import Document
 from llama_index.core.node_parser import SentenceSplitter
 from llama_index.core.schema import TextNode
 from llama_index.core.vector_stores import (
@@ -43,17 +39,35 @@ from llama_index.core.vector_stores import (
     MetadataFilters,
     VectorStoreQuery,
 )
-from llama_index.embeddings.google_genai import GoogleGenAIEmbedding
 from llama_index.vector_stores.chroma import ChromaVectorStore
 from PIL import Image
 from pypdf import PdfReader, PdfWriter
 
+from .chat_models import (
+    CHAT_MODEL_CLAUDE_OPUS,
+    CHAT_MODEL_CLAUDE_SONNET,
+    CHAT_MODEL_CODEX_OAUTH,
+    CHAT_MODEL_DEEPSEEK,
+    ChatModelId,
+)
+from .providers import (
+    ClaudeOAuthChatClient,
+    CodexOAuthChatClient,
+    CohereReranker,
+    DeepSeekChatClient,
+    ProviderError,
+    VoyageMultimodalEmbedder,
+)
+
 # ---------- Configuration ----------
 
-EMBED_MODEL = "gemini-embedding-2-preview"
-EMBED_DIM = 768
+logger = logging.getLogger("kb.core")
+
+EMBED_MODEL = "voyage-multimodal-3.5"
+EMBED_DIM = 1024
 PDF_PAGES_PER_EMBED = 1          # One vector per page — exact-page citations
 MAX_VIDEO_SECONDS_DIRECT = 120   # Above this, sample frames instead
+MAX_VIDEO_BYTES_DIRECT = 20 * 1024 * 1024
 DEFAULT_VIDEO_FRAME_INTERVAL_S = 5
 
 IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".bmp"}
@@ -119,7 +133,7 @@ class SearchResult:
 
 class KnowledgeBase:
     """
-    Multimodal KB on top of LlamaIndex + Chroma + Gemini Embedding 2.
+    Multimodal KB on top of Voyage multimodal embeddings + Chroma.
 
     Single instance per process. Cache it with @st.cache_resource in Streamlit.
     """
@@ -127,14 +141,37 @@ class KnowledgeBase:
     def __init__(
         self,
         *,
-        api_key: str,
+        voyage_api_key: str,
+        deepseek_api_key: str,
+        cohere_api_key: str | None = None,
         collection_name: str = "multimodal_kb",
         persist_dir: str | Path = "chroma_db",
         upload_dir: str | Path = "uploads",
         embed_model: str = EMBED_MODEL,
         embed_dim: int = EMBED_DIM,
+        deepseek_model: str = "deepseek-v4-pro",
+        deepseek_base_url: str = "https://api.deepseek.com",
+        codex_bin: str = "codex",
+        codex_oauth_model: str = "gpt-5.5",
+        codex_oauth_reasoning_effort: str = "xhigh",
+        codex_oauth_timeout_s: float = 600.0,
+        claude_bin: str = "claude",
+        claude_sonnet_model: str = "claude-sonnet-4-6",
+        claude_opus_model: str = "claude-opus-4-8",
+        claude_haiku_model: str = "claude-haiku-4-5",
+        claude_sonnet_effort: str = "medium",
+        claude_opus_effort: str = "xhigh",
+        claude_haiku_effort: str = "low",
+        claude_judge_effort: str = "medium",
+        claude_oauth_timeout_s: float = 900.0,
+        claude_oauth_premium_timeout_s: float = 1200.0,
+        claude_premium_repair_cap: int = 1,
+        cohere_rerank_model: str = "rerank-v4.0-pro",
+        enable_rerank: bool = True,
     ):
-        self.api_key = api_key
+        self.voyage_api_key = voyage_api_key
+        self.deepseek_api_key = deepseek_api_key
+        self.cohere_api_key = cohere_api_key
         self.collection_name = collection_name
         self.persist_dir = Path(persist_dir)
         self.upload_dir = Path(upload_dir)
@@ -144,59 +181,102 @@ class KnowledgeBase:
         self.persist_dir.mkdir(exist_ok=True, parents=True)
         self.upload_dir.mkdir(exist_ok=True, parents=True)
 
-        # 1. Direct google-genai client - used for media bytes embedding & vision RAG
-        self.genai_client = genai.Client(api_key=api_key)
-
-        # 2. LlamaIndex embedding wrapper - used for text chunking pipeline
-        self.embed_model = GoogleGenAIEmbedding(
-            model_name=embed_model,
-            api_key=api_key,
-            embedding_config=types.EmbedContentConfig(
-                output_dimensionality=embed_dim
-            ),
+        # 1. Cloud providers
+        self.embedder = VoyageMultimodalEmbedder(
+            api_key=voyage_api_key,
+            model=embed_model,
+            dimension=embed_dim,
         )
-        Settings.embed_model = self.embed_model
+        self.chat_client = DeepSeekChatClient(
+            api_key=deepseek_api_key,
+            model=deepseek_model,
+            base_url=deepseek_base_url,
+        )
+        self.codex_oauth_chat_client = CodexOAuthChatClient(
+            codex_bin=codex_bin,
+            model=codex_oauth_model,
+            reasoning_effort=codex_oauth_reasoning_effort,
+            timeout_s=codex_oauth_timeout_s,
+        )
+        self.claude_sonnet_chat_client = ClaudeOAuthChatClient(
+            claude_bin=claude_bin,
+            model=claude_sonnet_model,
+            effort=claude_sonnet_effort,
+            timeout_s=claude_oauth_timeout_s,
+        )
+        self.claude_opus_chat_client = ClaudeOAuthChatClient(
+            claude_bin=claude_bin,
+            model=claude_opus_model,
+            effort=claude_opus_effort,
+            timeout_s=claude_oauth_premium_timeout_s,
+        )
+        self.claude_haiku_worker_client = ClaudeOAuthChatClient(
+            claude_bin=claude_bin,
+            model=claude_haiku_model,
+            effort=claude_haiku_effort,
+            timeout_s=claude_oauth_timeout_s,
+        )
+        self.claude_sonnet_chief_client = ClaudeOAuthChatClient(
+            claude_bin=claude_bin,
+            model=claude_sonnet_model,
+            effort=claude_sonnet_effort,
+            timeout_s=claude_oauth_timeout_s,
+        )
+        self.claude_opus_judge_client = ClaudeOAuthChatClient(
+            claude_bin=claude_bin,
+            model=claude_opus_model,
+            effort=claude_judge_effort,
+            timeout_s=claude_oauth_timeout_s,
+        )
+        self.claude_premium_repair_cap = max(1, min(int(claude_premium_repair_cap), 2))
+        self.reranker = (
+            CohereReranker(api_key=cohere_api_key, model=cohere_rerank_model)
+            if enable_rerank and cohere_api_key
+            else None
+        )
 
-        # 3. Chroma persistent client + collection (cosine = best for unit-norm vectors)
+        # 2. Chroma persistent client + collection (cosine = best for unit-norm vectors)
         self.chroma_client = chromadb.PersistentClient(path=str(self.persist_dir))
         self.collection = self.chroma_client.get_or_create_collection(
             name=collection_name,
             metadata={"hnsw:space": "cosine"},
         )
 
-        # 4. LlamaIndex vector store + index - this is the public RAG interface
+        # 3. LlamaIndex Chroma adapter; embeddings are precomputed by Voyage.
         self.vector_store = ChromaVectorStore(chroma_collection=self.collection)
-        self.storage_context = StorageContext.from_defaults(vector_store=self.vector_store)
-        self.index = VectorStoreIndex.from_vector_store(
-            self.vector_store,
-            embed_model=self.embed_model,
-        )
+        self.text_splitter = SentenceSplitter(chunk_size=500, chunk_overlap=50)
 
-        # 5. Text ingestion pipeline (chunking + embedding + insert)
-        self.text_pipeline = IngestionPipeline(
-            transformations=[
-                SentenceSplitter(chunk_size=500, chunk_overlap=50),
-                self.embed_model,
-            ],
-            vector_store=self.vector_store,
-        )
+    def chat_client_for_model(self, chat_model: ChatModelId):
+        if chat_model == CHAT_MODEL_DEEPSEEK:
+            return self.chat_client
+        if chat_model == CHAT_MODEL_CODEX_OAUTH:
+            return self.codex_oauth_chat_client
+        if chat_model == CHAT_MODEL_CLAUDE_SONNET:
+            return self.claude_sonnet_chat_client
+        if chat_model == CHAT_MODEL_CLAUDE_OPUS:
+            return self.claude_opus_chat_client
+        raise ProviderError(f"Unsupported chat model: {chat_model}")
 
     # ===== Embedding primitives =====
 
     def _embed_bytes(self, data: bytes, mime_type: str) -> list[float]:
-        """Embed a single image/PDF/video blob via Gemini Embedding 2."""
-        result = self.genai_client.models.embed_content(
-            model=self.embed_model_name,
-            contents=[types.Part.from_bytes(data=data, mime_type=mime_type)],
-            config=types.EmbedContentConfig(output_dimensionality=self.embed_dim),
-        )
-        vec = result.embeddings[0].values
-        return _l2_normalize(vec)
+        """Embed one media blob via Voyage multimodal document mode."""
+        attempt = 0
+        while True:
+            try:
+                return _l2_normalize(self.embedder.embed_bytes(data, mime_type, input_type="document"))
+            except httpx.HTTPError:
+                attempt += 1
+                if attempt > 3:
+                    raise
+                time.sleep(min(2**attempt, 20))
+
+    def _embed_text(self, text: str, *, input_type: str) -> list[float]:
+        return _l2_normalize(self.embedder.embed_text(text, input_type=input_type))
 
     def _embed_query_text(self, text: str) -> list[float]:
-        """Embed a search query (we re-use embed_model so it goes through LlamaIndex)."""
-        vec = self.embed_model.get_query_embedding(text)
-        return _l2_normalize(vec)
+        """Embed a search query through Voyage query mode."""
+        return self._embed_text(text, input_type="query")
 
     # ===== Ingestion: dispatcher =====
 
@@ -206,6 +286,8 @@ class KnowledgeBase:
         *,
         original_name: str | None = None,
         tags: list[str] | None = None,
+        extra_metadata: dict[str, Any] | None = None,
+        copy_to_uploads: bool = True,
         on_progress: ProgressCallback = _noop,
         video_frame_interval_s: int = DEFAULT_VIDEO_FRAME_INTERVAL_S,
     ) -> list[str]:
@@ -215,20 +297,26 @@ class KnowledgeBase:
         if not src.exists():
             raise FileNotFoundError(src)
 
-        # Copy original into managed uploads dir (so it survives temp cleanup)
         file_id = uuid.uuid4().hex
-        dest = self.upload_dir / f"{file_id}{ext}"
-        if src.resolve() != dest.resolve():
+        if copy_to_uploads:
+            # Copy original into managed uploads dir (so it survives temp cleanup).
+            dest = self.upload_dir / f"{file_id}{ext}"
+        else:
+            dest = src.resolve()
+        if copy_to_uploads and src.resolve() != dest.resolve():
             shutil.copy2(src, dest)
 
         base_meta = {
             "id": file_id,
             "original_name": original_name or src.name,
             "file_path": str(dest),
+            "managed_upload": copy_to_uploads,
             "upload_time": datetime.now().isoformat(timespec="seconds"),
             "file_size": dest.stat().st_size,
             "tags": ",".join(tags) if tags else "",
         }
+        if extra_metadata:
+            base_meta.update(extra_metadata)
 
         on_progress(PipelineEvent("read", f"Loaded {base_meta['original_name']} ({_human_size(base_meta['file_size'])})"))
 
@@ -250,9 +338,8 @@ class KnowledgeBase:
         base_meta: dict[str, Any],
         on_progress: ProgressCallback,
     ) -> str:
-        on_progress(PipelineEvent("embed", "Embedding image with Gemini Embedding 2…"))
-        data = path.read_bytes()
-        mime = MIME_BY_EXT.get(path.suffix.lower(), "image/jpeg")
+        on_progress(PipelineEvent("embed", "Embedding image with Voyage multimodal..."))
+        data, mime = _image_embedding_payload(path)
         vec = self._embed_bytes(data, mime)
 
         node_id = f"img_{base_meta['id']}"
@@ -278,41 +365,35 @@ class KnowledgeBase:
         base_meta["total_pages"] = total_pages
         on_progress(PipelineEvent("inspect", f"PDF has {total_pages} page(s)"))
 
-        # One vector per page so retrieval pinpoints the exact page (not a 6-page batch).
+        # One vector per page so retrieval pinpoints the exact page.
         on_progress(PipelineEvent(
             "split",
-            f"Embedding {total_pages} page(s) individually for exact-page citations…",
+            f"Rendering and embedding {total_pages} page(s) individually for exact-page citations...",
         ))
-        page_paths = _split_pdf(path, PDF_PAGES_PER_EMBED)
         ids: list[str] = []
-        try:
-            for i, (page_path, start_p, end_p) in enumerate(page_paths, 1):
-                page = start_p  # start_p == end_p when PDF_PAGES_PER_EMBED == 1
-                on_progress(PipelineEvent(
-                    "embed",
-                    f"Embedding page {page}/{total_pages}…",
-                    progress=i / total_pages,
-                ))
-                data = page_path.read_bytes()
-                vec = self._embed_bytes(data, "application/pdf")
-                node_id = f"pdf_{base_meta['id']}_p{page}"
-                node = TextNode(
-                    id_=node_id,
-                    text=f"[PDF] {base_meta['original_name']} page {page}",
-                    metadata={
-                        **base_meta,
-                        "modality": "pdf",
-                        "page": page,
-                        "page_start": page,
-                        "page_end": end_p,
-                    },
-                    embedding=vec,
-                )
-                self.vector_store.add([node])
-                ids.append(node_id)
-        finally:
-            for p, _, _ in page_paths:
-                p.unlink(missing_ok=True)
+        for page in range(1, total_pages + 1):
+            on_progress(PipelineEvent(
+                "embed",
+                f"Embedding rendered page {page}/{total_pages}...",
+                progress=page / max(total_pages, 1),
+            ))
+            img = render_pdf_page(path, page - 1, zoom=2.0)
+            vec = self._embed_bytes(_image_to_jpeg_bytes(img), "image/jpeg")
+            node_id = f"pdf_{base_meta['id']}_p{page}"
+            node = TextNode(
+                id_=node_id,
+                text=f"[PDF page image] {base_meta['original_name']} page {page}",
+                metadata={
+                    **base_meta,
+                    "modality": "pdf",
+                    "page": page,
+                    "page_start": page,
+                    "page_end": page,
+                },
+                embedding=vec,
+            )
+            self.vector_store.add([node])
+            ids.append(node_id)
 
         on_progress(PipelineEvent(
             "done",
@@ -332,27 +413,38 @@ class KnowledgeBase:
         base_meta["duration_seconds"] = round(duration_s, 1)
         on_progress(PipelineEvent("inspect", f"Video duration: {duration_s:.1f}s"))
 
-        # Short video: embed the whole MP4 directly (Gemini Embedding 2 supports up to ~120s)
-        if duration_s <= MAX_VIDEO_SECONDS_DIRECT:
-            on_progress(PipelineEvent("embed", "Embedding full video…"))
-            data = path.read_bytes()
-            mime = MIME_BY_EXT.get(path.suffix.lower(), "video/mp4")
-            vec = self._embed_bytes(data, mime)
-            node_id = f"vid_{base_meta['id']}"
-            node = TextNode(
-                id_=node_id,
-                text=f"[Video] {base_meta['original_name']} ({duration_s:.1f}s)",
-                metadata={**base_meta, "modality": "video", "frame_index": -1},
-                embedding=vec,
-            )
-            self.vector_store.add([node])
-            on_progress(PipelineEvent("done", f"Indexed video: {base_meta['original_name']}", 1.0))
-            return [node_id]
+        # Short MP4: embed the whole video directly. Voyage documents MP4 only.
+        can_embed_full_video = (
+            path.suffix.lower() == ".mp4"
+            and path.stat().st_size <= MAX_VIDEO_BYTES_DIRECT
+            and duration_s <= MAX_VIDEO_SECONDS_DIRECT
+        )
+        if can_embed_full_video:
+            try:
+                on_progress(PipelineEvent("embed", "Embedding full MP4 with Voyage multimodal..."))
+                data = path.read_bytes()
+                vec = self._embed_bytes(data, "video/mp4")
+                node_id = f"vid_{base_meta['id']}"
+                node = TextNode(
+                    id_=node_id,
+                    text=f"[Video] {base_meta['original_name']} ({duration_s:.1f}s)",
+                    metadata={**base_meta, "modality": "video", "frame_index": -1},
+                    embedding=vec,
+                )
+                self.vector_store.add([node])
+                on_progress(PipelineEvent("done", f"Indexed video: {base_meta['original_name']}", 1.0))
+                return [node_id]
+            except (ProviderError, httpx.HTTPError) as exc:
+                logger.warning(
+                    "Full-video embedding failed for %s; falling back to sampled frames: %s",
+                    base_meta["original_name"],
+                    exc,
+                )
 
-        # Long video: sample frames every N seconds, embed each as image
+        # Long or non-MP4 video: sample frames every N seconds, embed each as image.
         on_progress(PipelineEvent(
             "split",
-            f"Sampling frames every {frame_interval_s}s (~{int(duration_s // frame_interval_s)} frames)…",
+            f"Sampling frames every {frame_interval_s}s (~{int(duration_s // frame_interval_s)} frames)...",
         ))
         frames = _sample_video_frames(path, frame_interval_s)
         ids: list[str] = []
@@ -402,9 +494,7 @@ class KnowledgeBase:
         base_meta: dict[str, Any] | None = None,
         on_progress: ProgressCallback = _noop,
     ) -> list[str]:
-        """Chunk + embed + insert raw text. Uses LlamaIndex IngestionPipeline."""
-        from llama_index.core import Document  # local import keeps top-of-file clean
-
+        """Chunk + embed + insert raw text with Voyage document embeddings."""
         meta = dict(base_meta or {})
         meta.setdefault("id", uuid.uuid4().hex)
         meta.setdefault("original_name", meta.get("original_name", "text_snippet"))
@@ -412,8 +502,16 @@ class KnowledgeBase:
         meta["modality"] = "text"
 
         doc = Document(text=text, metadata=meta)
-        on_progress(PipelineEvent("embed", "Running LlamaIndex IngestionPipeline (split → embed → store)…"))
-        nodes = self.text_pipeline.run(documents=[doc], show_progress=False)
+        on_progress(PipelineEvent("split", "Chunking text via LlamaIndex SentenceSplitter..."))
+        nodes = self.text_splitter.get_nodes_from_documents([doc])
+        for i, node in enumerate(nodes, 1):
+            on_progress(PipelineEvent(
+                "embed",
+                f"Embedding text chunk {i}/{len(nodes)} with Voyage...",
+                progress=i / max(len(nodes), 1),
+            ))
+            node.embedding = self._embed_text(node.get_content(), input_type="document")
+        self.vector_store.add(nodes)
         on_progress(PipelineEvent(
             "done",
             f"Indexed text: {meta.get('original_name')} ({len(nodes)} chunks)",
@@ -431,9 +529,15 @@ class KnowledgeBase:
         modality_filter: list[str] | None = None,
         on_progress: ProgressCallback = _noop,
     ) -> list[SearchResult]:
-        on_progress(PipelineEvent("embed", "Embedding query with Gemini Embedding 2…"))
+        on_progress(PipelineEvent("embed", "Embedding query with Voyage multimodal..."))
         qvec = self._embed_query_text(query)
-        return self._query_by_embedding(qvec, top_k=top_k, modality_filter=modality_filter, on_progress=on_progress)
+        return self._query_by_embedding(
+            qvec,
+            top_k=top_k,
+            modality_filter=modality_filter,
+            on_progress=on_progress,
+            rerank_query=query,
+        )
 
     def search_image(
         self,
@@ -457,6 +561,7 @@ class KnowledgeBase:
         top_k: int,
         modality_filter: list[str] | None,
         on_progress: ProgressCallback,
+        rerank_query: str | None = None,
     ) -> list[SearchResult]:
         on_progress(PipelineEvent("search", f"Searching {self.count()} vectors…"))
 
@@ -491,6 +596,18 @@ class KnowledgeBase:
                 snippet=node.get_content() if hasattr(node, "get_content") else "",
             ))
 
+        if rerank_query and self.reranker and out:
+            try:
+                on_progress(PipelineEvent("rerank", f"Reranking {len(out)} result(s) with Cohere..."))
+                out = self.reranker.rerank(
+                    rerank_query,
+                    out,
+                    top_k=top_k,
+                    to_document=_rerank_document,
+                )
+            except ProviderError as exc:
+                logger.warning("Cohere rerank failed; returning vector order: %s", exc)
+
         on_progress(PipelineEvent("done", f"Returned {len(out)} result(s)", 1.0))
         return out
 
@@ -511,7 +628,7 @@ class KnowledgeBase:
             counts[modality] = counts.get(modality, 0) + 1
         return counts
 
-    def list_items(self, limit: int = 200) -> list[dict[str, Any]]:
+    def list_items(self, *, limit: int | None = None, offset: int = 0) -> tuple[list[dict[str, Any]], int]:
         """List stored items grouped by source file (for the manage view)."""
         data = self.collection.get(include=["metadatas"])
         ids = data.get("ids") or []
@@ -526,10 +643,68 @@ class KnowledgeBase:
                 "file_path": meta.get("file_path"),
                 "modality": meta.get("modality", "unknown"),
                 "upload_time": meta.get("upload_time", ""),
+                "preview_image_file_id": meta.get("preview_image_file_id"),
                 "node_ids": [],
             })
             entry["node_ids"].append(nid)
-        return list(grouped.values())[:limit]
+        items = list(grouped.values())
+        items.sort(key=lambda item: str(item.get("upload_time", "")), reverse=True)
+        total = len(items)
+        if offset > 0:
+            items = items[offset:]
+        if limit is not None:
+            items = items[:limit]
+        return items, total
+
+    def get_item(
+        self,
+        *,
+        file_id: str | None = None,
+        node_id: str | None = None,
+    ) -> dict[str, Any] | None:
+        """Return one grouped source item by file_id or by one of its node IDs."""
+        if bool(file_id) == bool(node_id):
+            raise ValueError("Pass exactly one of file_id or node_id")
+
+        matched_node_id: str | None = None
+        if node_id:
+            seed = self.collection.get(ids=[node_id], include=["metadatas"])
+            seed_ids = seed.get("ids") or []
+            seed_metas = seed.get("metadatas") or []
+            if not seed_ids or not seed_metas:
+                return None
+            matched_node_id = seed_ids[0]
+            file_id = (seed_metas[0] or {}).get("id") or matched_node_id
+
+        assert file_id is not None
+        data = self.collection.get(where={"id": file_id}, include=["metadatas", "documents"])
+        ids = data.get("ids") or []
+        metas = data.get("metadatas") or []
+        docs = data.get("documents") or []
+        if not ids:
+            return None
+
+        first_meta = dict(metas[0] or {})
+        nodes = []
+        for nid, meta, doc in zip(ids, metas, docs):
+            nodes.append(
+                {
+                    "node_id": nid,
+                    "snippet": doc or "",
+                    "metadata": dict(meta or {}),
+                }
+            )
+
+        return {
+            "file_id": first_meta.get("id") or file_id,
+            "original_name": first_meta.get("original_name") or file_id,
+            "modality": first_meta.get("modality", "unknown"),
+            "upload_time": first_meta.get("upload_time", ""),
+            "node_ids": ids,
+            "matched_node_id": matched_node_id,
+            "metadata": first_meta,
+            "nodes": nodes,
+        }
 
     def delete_by_file_id(self, file_id: str) -> int:
         """Delete all chunks/frames for a single source file. Returns count deleted."""
@@ -541,8 +716,13 @@ class KnowledgeBase:
         metas = data.get("metadatas") or []
         for meta in metas:
             fp = (meta or {}).get("file_path")
-            if fp and Path(fp).exists():
-                Path(fp).unlink(missing_ok=True)
+            if fp and (meta or {}).get("managed_upload", True):
+                path = Path(fp)
+                try:
+                    if path.exists() and path.resolve().is_relative_to(self.upload_dir.resolve()):
+                        path.unlink(missing_ok=True)
+                except OSError:
+                    logger.warning("Could not delete managed upload %s", path)
         self.collection.delete(ids=ids)
         return len(ids)
 
@@ -560,17 +740,6 @@ class KnowledgeBase:
             metadata={"hnsw:space": "cosine"},
         )
         self.vector_store = ChromaVectorStore(chroma_collection=self.collection)
-        self.storage_context = StorageContext.from_defaults(vector_store=self.vector_store)
-        self.index = VectorStoreIndex.from_vector_store(
-            self.vector_store, embed_model=self.embed_model
-        )
-        self.text_pipeline = IngestionPipeline(
-            transformations=[
-                SentenceSplitter(chunk_size=500, chunk_overlap=50),
-                self.embed_model,
-            ],
-            vector_store=self.vector_store,
-        )
 
 
 # ---------- Helpers ----------
@@ -591,6 +760,38 @@ def _human_size(n: int) -> str:
             return f"{f:.1f} {u}"
         f /= 1024
     return f"{n} B"
+
+
+def _image_to_jpeg_bytes(img: Image.Image, quality: int = 88) -> bytes:
+    buf = io.BytesIO()
+    if img.mode != "RGB":
+        img = img.convert("RGB")
+    img.save(buf, format="JPEG", quality=quality)
+    return buf.getvalue()
+
+
+def _image_embedding_payload(path: Path) -> tuple[bytes, str]:
+    mime = MIME_BY_EXT.get(path.suffix.lower(), "image/jpeg")
+    if mime in {"image/jpeg", "image/png"}:
+        return path.read_bytes(), mime
+    with Image.open(path) as img:
+        img.seek(0)
+        return _image_to_jpeg_bytes(img), "image/jpeg"
+
+
+def _rerank_document(result: SearchResult) -> str:
+    meta = result.metadata
+    parts = [
+        f"Name: {result.display_name}",
+        f"Modality: {result.modality}",
+    ]
+    if meta.get("page_start"):
+        parts.append(f"Page: {meta.get('page_start')}")
+    if meta.get("timestamp_seconds") is not None:
+        parts.append(f"Timestamp: {meta.get('timestamp_seconds')} seconds")
+    if result.snippet:
+        parts.append(f"Snippet: {result.snippet[:1200]}")
+    return "\n".join(parts)
 
 
 def _split_pdf(pdf_path: Path, max_pages: int) -> list[tuple[Path, int, int]]:

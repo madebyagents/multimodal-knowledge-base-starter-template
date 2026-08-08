@@ -1,0 +1,40 @@
+{
+  "authority_basis": "deterministic_registry_policy",
+  "blockers": [],
+  "decision": "eligible",
+  "license_policy": {
+    "attribution_required": true,
+    "license_sha256": "4259155fb06f127687ee7b0a8a3682d45132db0f2da26cbc0b7a2d1e796436b8",
+    "policy_id": "apache-2.0-root-license-no-overrides",
+    "spdx_id": "Apache-2.0",
+    "trademark_rights_granted": false
+  },
+  "origin_observation_sha256": "4e548a34d7e16957c12945c105f816f6a7d984ca9371ce91a1c2ce3572749a6d",
+  "repository": {
+    "https_url": "https://github.com/heygen-com/hyperframes",
+    "repository_id": "heygen-com/hyperframes",
+    "subject_revision": "2935be6bf66d12f41ac768d841d567323b547357"
+  },
+  "requested_uses": [
+    "derived_summary",
+    "external_provider_disclosure",
+    "local_embedding"
+  ],
+  "reviewer_id": "dantedash.apache-2.0-path-coverage.v1",
+  "schema_version": "dantedash.governed_source_authority_decision.v1",
+  "source": {
+    "git_blob_sha1": "94c3e86e8de695ad49c1108c96ea3113095de368",
+    "relative_path": "neon-electric.md",
+    "sha256": "35225bf8d2cd37223e88e0bc59b0a96bc8adeda7225389b3df97b675cfd33dfb",
+    "size_bytes": 380
+  },
+  "trust_registry": {
+    "provenance": {
+      "generated": false,
+      "kind": "repository_reviewed_policy",
+      "owner": "dantedash"
+    },
+    "registry_id": "hyperframes-palettes-2935be6",
+    "sha256": "af050a9c202f4f9bfd7b9b4bd25a8641745f0b3bb528b73808602eb9094c0c8d"
+  }
+}

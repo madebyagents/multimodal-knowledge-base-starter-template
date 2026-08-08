@@ -1,0 +1,135 @@
+{
+  "schema_version": "dantedash.lightrag_multimodal_production_profile.v1",
+  "profile_id": "lightrag-multimodal-production-20260807",
+  "status": "active",
+  "activation_scope": "configuration_and_runtime_binding",
+  "provider_preflight_status": "required_before_next_corpus",
+  "activated_at": "2026-08-07T16:34:28.280809+00:00",
+  "graph_runtime": {
+    "implementation": "lightrag-hku",
+    "version": "1.4.15",
+    "api_version": "0287",
+    "storage": {
+      "kv": "JsonKVStorage",
+      "document_status": "JsonDocStatusStorage",
+      "graph": "NetworkXStorage",
+      "vectors": "NanoVectorDBStorage"
+    },
+    "chunking": {
+      "chunk_size": 1200,
+      "chunk_overlap": 100
+    },
+    "extraction_and_merge": {
+      "provider": "deepseek",
+      "binding": "openai",
+      "model": "deepseek-v4-pro",
+      "summary_language": "Portuguese",
+      "force_llm_summary_on_merge": 8,
+      "summary_context_size": 12000,
+      "summary_max_tokens": 1200,
+      "max_async": 8,
+      "max_parallel_insert": 8,
+      "llm_cache": true,
+      "llm_extract_cache": true
+    },
+    "embeddings": {
+      "provider": "voyage",
+      "binding": "openai",
+      "model": "voyage-4-large",
+      "dimension": 2048,
+      "cosine_threshold": 0.2
+    },
+    "retrieval_rerank": {
+      "provider": "cohere",
+      "model": "rerank-v4.0-pro",
+      "construction_role": "none",
+      "retrieval_only": true
+    }
+  },
+  "multimodal": {
+    "package_contract": "pdf -> page -> image/table/chart -> text card -> visual card -> graph card -> cag pack",
+    "visual_analysis": {
+      "provider": "alibaba_qwen",
+      "primary_model": "qwen3.7-max-2026-06-08",
+      "ocr_model": "qwen3.5-ocr",
+      "role": "visual_analysis_only",
+      "may_extract_graph_entities_or_relations": false
+    },
+    "visual_embeddings": {
+      "owner": "knowledge_hub",
+      "provider": "voyage",
+      "model": "voyage-multimodal-3.5",
+      "dimension": 1024,
+      "role": "cross_modal_visual_retrieval"
+    },
+    "required_links": [
+      "stable_package_ids",
+      "source_sha256",
+      "pdf_package_id",
+      "page_package_id",
+      "image_package_id",
+      "card_id",
+      "graph_refs",
+      "visual_refs",
+      "cag_pack_id"
+    ]
+  },
+  "ingestion_policy": {
+    "accepted_unit": "rights_safe_curated_card",
+    "raw_book_markdown_allowed": false,
+    "binary_media_in_lightrag_allowed": false,
+    "direct_datastore_writes_allowed": false,
+    "knowledge_hub_is_write_owner": true,
+    "qwen2.5_7b_new_documents_allowed": false,
+    "credentials_may_be_persisted_in_manifests": false,
+    "preflight_requires_bounded_provider_auth_and_billing_probe": true
+  },
+  "rollout": [
+    {
+      "order": 1,
+      "stage": "one_document_sample",
+      "requires": [
+        "certified_package_registry",
+        "rights_clear_cards",
+        "provider_preflight_green",
+        "zero_active_or_failed_lightrag_documents"
+      ]
+    },
+    {
+      "order": 2,
+      "stage": "five_document_sample",
+      "requires": [
+        "one_document_sample_green",
+        "query_recovery_green",
+        "visual_links_green"
+      ]
+    },
+    {
+      "order": 3,
+      "stage": "topic_cluster_sample",
+      "requires": [
+        "five_document_sample_green",
+        "graph_regression_green",
+        "cag_refs_green"
+      ]
+    },
+    {
+      "order": 4,
+      "stage": "full_corpus_after_certification",
+      "requires": [
+        "topic_cluster_sample_green",
+        "explicit_operator_gate",
+        "pre_write_backup_and_counts",
+        "black_label_certification_green"
+      ]
+    }
+  ],
+  "baseline": {
+    "knowledge_hub_run_id": "kh-native-docling-superset-20260807",
+    "knowledge_hub_graph_version_id": "074c4cf77d9a84b68f2b5e8a23f31a14",
+    "node_count": 52020,
+    "edge_count": 123523,
+    "lightrag_processed_documents": 15768,
+    "lightrag_failed_documents": 0
+  }
+}

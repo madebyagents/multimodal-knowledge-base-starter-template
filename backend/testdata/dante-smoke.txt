@@ -1,0 +1,6 @@
+Dante multimodal RAG smoke fixture.
+
+This file exists only to validate text ingestion, Voyage multimodal embeddings,
+Cohere reranking, and DeepSeek grounded chat in the local Obsidian sidecar.
+
+Expected retrieval phrase: Dante visual RAG smoke fixture.

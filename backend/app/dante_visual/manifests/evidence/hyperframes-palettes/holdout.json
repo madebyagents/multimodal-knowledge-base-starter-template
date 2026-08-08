@@ -1,0 +1,93 @@
+{
+  "authored_from": "independent_operator_workflows_before_card_generation",
+  "contract_id": "hyperframes-palettes-holdout-20260808",
+  "contract_sha256": "5866518d046a8825ad8868e98cd8c9e6ffe76706fc83dce550bf87ce525359cf",
+  "digest_algorithm": "sha256",
+  "digest_scope": "canonical_json_of_thresholds_and_queries",
+  "frozen_before_card_generation": true,
+  "generated_card_content_allowed": false,
+  "negative_control_ids": [
+    "H5"
+  ],
+  "queries": [
+    {
+      "answer_criteria": [
+        "Routes to clean-corporate.",
+        "Explains information hierarchy and effortless scanning.",
+        "Uses measured accents rather than spectacle.",
+        "Does not reproduce source color values."
+      ],
+      "expected_topic_ids": [
+        "professional-clarity"
+      ],
+      "holdout_id": "H1",
+      "negative_control": false,
+      "query": "Which palette direction should organize a board update containing dense charts, compact labels, and a measured executive tone?"
+    },
+    {
+      "answer_criteria": [
+        "Routes the esports case to neon-electric.",
+        "Routes the cheerful launch case to bold-energetic.",
+        "Distinguishes luminous digital intensity from general visual momentum."
+      ],
+      "expected_topic_ids": [
+        "chromatic-expression"
+      ],
+      "holdout_id": "H2",
+      "negative_control": false,
+      "query": "Contrast a dark-screen esports package with a cheerful launch film and choose the best palette direction for each."
+    },
+    {
+      "answer_criteria": [
+        "Routes the gala to jewel-rich.",
+        "Routes the software interface to dark-premium.",
+        "Distinguishes opulence from controlled low-light polish."
+      ],
+      "expected_topic_ids": [
+        "chromatic-expression",
+        "cinematic-luxury"
+      ],
+      "holdout_id": "H3",
+      "negative_control": false,
+      "query": "Choose separate palette directions for an ornate prestige gala and a polished luxury software interface."
+    },
+    {
+      "answer_criteria": [
+        "Routes the map to monochrome.",
+        "Routes the conservation landscape to nature-earth.",
+        "Routes gentle skincare to pastel-soft.",
+        "Routes the documentary to warm-editorial.",
+        "Provides concise rationale without exposing source bodies."
+      ],
+      "expected_topic_ids": [
+        "tonal-restraint",
+        "organic-grounding",
+        "chromatic-expression",
+        "editorial-storytelling"
+      ],
+      "holdout_id": "H4",
+      "negative_control": false,
+      "query": "Match palette directions to a type-led map with minimal hue, a conservation landscape, gentle skincare, and an intimate magazine documentary."
+    },
+    {
+      "answer_criteria": [
+        "Abstains from inventing a flag.",
+        "States that palette evidence does not answer runtime configuration questions.",
+        "Routes the operator to CLI or runtime documentation."
+      ],
+      "expected_topic_ids": [],
+      "holdout_id": "H5",
+      "negative_control": true,
+      "query": "Which GPU worker concurrency CLI option should be used for a 4K export?"
+    }
+  ],
+  "query_count": 5,
+  "thresholds": {
+    "answer_criteria_pass_count_min": 5,
+    "invented_evidence_claims_max": 0,
+    "negative_control_pass_count_min": 1,
+    "raw_source_body_leaks_max": 0,
+    "topic_routing_pass_count_min": 5,
+    "unsupported_current_claims_max": 0
+  }
+}

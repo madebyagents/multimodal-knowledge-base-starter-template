@@ -15,8 +15,8 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from .deps import get_kb, get_settings
-from .routes import chat, ingest, library, preview, search
+from .deps import get_kb_gateway, get_knowledge_hub_client, get_settings
+from .routes import chat, chat_state, graph, ingest, knowledge_hub, library, preview, search, vault_index
 
 logger = logging.getLogger("kb")
 
@@ -28,9 +28,16 @@ async def lifespan(_app: FastAPI):
         level=settings.log_level,
         format="%(asctime)s %(levelname)s %(name)s — %(message)s",
     )
-    get_kb()  # fail fast if API key / Chroma broken
+    get_kb_gateway()  # fail fast if configured KB backend is invalid/broken
     logger.info("Knowledge Base ready.")
-    yield
+    try:
+        yield
+    finally:
+        try:
+            get_knowledge_hub_client().close()
+        finally:
+            get_knowledge_hub_client.cache_clear()
+            get_kb_gateway.cache_clear()
 
 
 app = FastAPI(
@@ -54,7 +61,7 @@ async def access_log(request: Request, call_next):
 
 # CORS only if explicitly configured (same-origin prod deploys don't need it).
 # Parse CORS_ORIGINS directly so we don't have to instantiate Settings at
-# import time (which would crash without GEMINI_API_KEY); lifespan still
+# import time (which would crash without provider keys); lifespan still
 # surfaces that error cleanly when the app actually starts.
 _cors_origins = [o.strip() for o in os.getenv("CORS_ORIGINS", "").split(",") if o.strip()]
 if _cors_origins:
@@ -70,8 +77,12 @@ if _cors_origins:
 app.include_router(ingest.router, prefix="/api")
 app.include_router(search.router, prefix="/api")
 app.include_router(chat.router, prefix="/api")
+app.include_router(chat_state.router, prefix="/api")
 app.include_router(library.router, prefix="/api")
 app.include_router(preview.router, prefix="/api")
+app.include_router(vault_index.router, prefix="/api")
+app.include_router(graph.router, prefix="/api")
+app.include_router(knowledge_hub.router, prefix="/api")
 
 
 # Static SPA mount for prod. In dev this directory doesn't exist, so we skip.

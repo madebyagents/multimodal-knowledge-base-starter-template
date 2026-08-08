@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "description": "Workspace root for the multimodal knowledge base starter (frontend is the only Node package; backend is Python via uv).",
+  "main": "electron/main.cjs",
   "packageManager": "pnpm@11.5.0",
   "engines": {
     "node": ">=22.11.0"
@@ -10,7 +11,13 @@
   "scripts": {
     "dev": "pnpm --filter frontend dev",
     "build": "pnpm --filter frontend build",
+    "electron:dev": "electron electron",
+    "electron:package:local": "scripts/build-electron-app.sh",
+    "electron:build": "pnpm build && pnpm electron:package:local",
     "preview": "pnpm --filter frontend preview",
     "typecheck": "pnpm --filter frontend typecheck"
+  },
+  "devDependencies": {
+    "electron": "42.4.0"
   }
 }

@@ -1,0 +1,268 @@
+{
+  "schema_version": "dantedash.seedance_i2v_runtime_capabilities.v1",
+  "manifest_id": "seedance-i2v-runtime-capabilities-20260808",
+  "observed_at": "2026-08-08T06:22:50Z",
+  "evidence_mode": "redacted_read_only",
+  "policy": {
+    "allowed_statuses": [
+      "available",
+      "unavailable",
+      "not_provable"
+    ],
+    "not_provable_is_blocking": true,
+    "live_mutation_attempted": false,
+    "promotion_attempted": false
+  },
+  "dependency_provenance": {
+    "repository_head": {
+      "revision": "e54815bf433e72f5963cc1ddb1df04df092670b4",
+      "state": "committed_head"
+    },
+    "production_profile": {
+      "artifact_ref": "backend/app/dante_visual/manifests/lightrag_multimodal_production_profile_20260807.v1.json",
+      "approval_basis": "approved_snapshot_artifact",
+      "approval_snapshot_id": "DEEP_MEMORY_DANTEDASH_034",
+      "sha256": "b6975a9aa8e7370f0cc8e6436595757bd13012afc18d35b9532b8f20f9ba2899",
+      "verification": "hash_match"
+    }
+  },
+  "redaction_contract": {
+    "absolute_paths_included": false,
+    "private_endpoint_values_included": false,
+    "credentials_or_sessions_included": false,
+    "raw_provider_or_service_responses_included": false,
+    "document_content_included": false
+  },
+  "live_read_only_observations": {
+    "lightrag": {
+      "openapi": {
+        "status": "available",
+        "reachable": true
+      },
+      "document_scan": {
+        "pagination_complete": true,
+        "documents_scanned": 15768,
+        "documents_with_id": 15768,
+        "documents_with_file_source": 15768,
+        "documents_with_payload_hash": 0,
+        "documents_with_normalized_fingerprint": 0,
+        "documents_with_embedded_sha256": 0,
+        "documents_with_knowledge_hub_reference": 0
+      },
+      "legacy_candidate_probe": {
+        "pattern_id": "seedance-legacy-terms-v1",
+        "pattern_terms": [
+          "seedance",
+          "lowmod",
+          "control_arms",
+          "e3_A_strip",
+          "e4_decisive",
+          "r5_drogas"
+        ],
+        "candidate_file_source_matches": 0,
+        "candidate_summary_matches": 0,
+        "conclusion": "no_obvious_legacy_match",
+        "absence_proven": false,
+        "limitation": "No authoritative payload hashes, normalized fingerprints, embedded source hashes, or Knowledge Hub references were present."
+      },
+      "insert_contract": {
+        "observed_request_fields": [
+          "text",
+          "file_source",
+          "file_sources"
+        ],
+        "payload_hash_field_advertised": false,
+        "fencing_or_lease_field_advertised": false
+      }
+    },
+    "knowledge_hub": {
+      "health": {
+        "status": "available",
+        "reported_state": "ok"
+      },
+      "advertised_import_operations": [
+        {
+          "operation_id": "graph_import",
+          "route": "/dantedash/graph/import",
+          "request_fields": [
+            "source_path",
+            "run_id",
+            "execute"
+          ],
+          "evidence_level": "openapi_advertised_only"
+        },
+        {
+          "operation_id": "package_import",
+          "route": "/dantedash/packages/import",
+          "request_fields": [
+            "rows",
+            "reset_collection"
+          ],
+          "evidence_level": "openapi_advertised_only"
+        }
+      ],
+      "unadvertised_required_controls": [
+        "atomic_candidate_commit",
+        "single_use_capability",
+        "watchdog_or_lease_ttl",
+        "gate_close",
+        "restart"
+      ]
+    }
+  },
+  "capabilities": [
+    {
+      "capability_id": "lightrag.openapi_read",
+      "status": "available",
+      "blocking": false,
+      "scope": "p0_read_only",
+      "evidence_refs": [
+        "/live_read_only_observations/lightrag/openapi"
+      ]
+    },
+    {
+      "capability_id": "lightrag.document_inventory",
+      "status": "available",
+      "blocking": false,
+      "scope": "p0_read_only",
+      "evidence_refs": [
+        "/live_read_only_observations/lightrag/document_scan"
+      ]
+    },
+    {
+      "capability_id": "lightrag.legacy_identity_reconciliation",
+      "status": "not_provable",
+      "blocking": true,
+      "scope": "lightrag_mutation",
+      "reason": "No obvious legacy candidate matched, but the deployed index exposes no authoritative payload hash, normalized fingerprint, embedded source hash, or Knowledge Hub reference with which to prove absence.",
+      "evidence_refs": [
+        "/live_read_only_observations/lightrag/document_scan",
+        "/live_read_only_observations/lightrag/legacy_candidate_probe"
+      ]
+    },
+    {
+      "capability_id": "lightrag.authoritative_payload_hash_lookup",
+      "status": "unavailable",
+      "blocking": true,
+      "scope": "lightrag_mutation",
+      "reason": "Neither the scanned document index nor the advertised insert contract exposes an authoritative payload hash bound to stable file_source.",
+      "evidence_refs": [
+        "/live_read_only_observations/lightrag/document_scan/documents_with_payload_hash",
+        "/live_read_only_observations/lightrag/insert_contract"
+      ]
+    },
+    {
+      "capability_id": "lightrag.service_enforced_fencing",
+      "status": "unavailable",
+      "blocking": true,
+      "scope": "lightrag_mutation",
+      "reason": "The advertised mutation request has no lease, fencing token, or equivalent concurrency-control field.",
+      "evidence_refs": [
+        "/live_read_only_observations/lightrag/insert_contract"
+      ]
+    },
+    {
+      "capability_id": "knowledge_hub.health",
+      "status": "available",
+      "blocking": false,
+      "scope": "p0_read_only",
+      "evidence_refs": [
+        "/live_read_only_observations/knowledge_hub/health"
+      ]
+    },
+    {
+      "capability_id": "knowledge_hub.graph_import_route",
+      "status": "available",
+      "blocking": false,
+      "scope": "route_discovery",
+      "qualification": "openapi_advertised_only",
+      "evidence_refs": [
+        "/live_read_only_observations/knowledge_hub/advertised_import_operations/0"
+      ]
+    },
+    {
+      "capability_id": "knowledge_hub.package_import_route",
+      "status": "available",
+      "blocking": false,
+      "scope": "route_discovery",
+      "qualification": "openapi_advertised_only",
+      "evidence_refs": [
+        "/live_read_only_observations/knowledge_hub/advertised_import_operations/1"
+      ]
+    },
+    {
+      "capability_id": "knowledge_hub.atomic_import",
+      "status": "not_provable",
+      "blocking": true,
+      "scope": "knowledge_hub_promotion",
+      "reason": "Advertised request schemas expose no transaction, candidate-manifest swap, or old-or-complete-state guarantee.",
+      "evidence_refs": [
+        "/live_read_only_observations/knowledge_hub/advertised_import_operations"
+      ]
+    },
+    {
+      "capability_id": "knowledge_hub.single_use_capability",
+      "status": "unavailable",
+      "blocking": true,
+      "scope": "knowledge_hub_promotion",
+      "reason": "No single-use authorization, request-binding, expiry, or replay-control field is advertised.",
+      "evidence_refs": [
+        "/live_read_only_observations/knowledge_hub/advertised_import_operations"
+      ]
+    },
+    {
+      "capability_id": "knowledge_hub.watchdog_or_lease_ttl",
+      "status": "unavailable",
+      "blocking": true,
+      "scope": "knowledge_hub_promotion",
+      "reason": "No watchdog, lease, or TTL control operation is advertised.",
+      "evidence_refs": [
+        "/live_read_only_observations/knowledge_hub/unadvertised_required_controls"
+      ]
+    },
+    {
+      "capability_id": "knowledge_hub.gate_close",
+      "status": "unavailable",
+      "blocking": true,
+      "scope": "knowledge_hub_promotion",
+      "reason": "No typed gate-close operation is advertised.",
+      "evidence_refs": [
+        "/live_read_only_observations/knowledge_hub/unadvertised_required_controls"
+      ]
+    },
+    {
+      "capability_id": "knowledge_hub.restart",
+      "status": "unavailable",
+      "blocking": true,
+      "scope": "knowledge_hub_promotion",
+      "reason": "No typed restart request or restart-status operation is advertised.",
+      "evidence_refs": [
+        "/live_read_only_observations/knowledge_hub/unadvertised_required_controls"
+      ]
+    }
+  ],
+  "gate_decisions": {
+    "p0_read_only": {
+      "decision": "allowed",
+      "mutation_allowed": false
+    },
+    "lightrag_mutation": {
+      "decision": "blocked",
+      "blockers": [
+        "lightrag.legacy_identity_reconciliation",
+        "lightrag.authoritative_payload_hash_lookup",
+        "lightrag.service_enforced_fencing"
+      ]
+    },
+    "knowledge_hub_promotion": {
+      "decision": "blocked",
+      "blockers": [
+        "knowledge_hub.atomic_import",
+        "knowledge_hub.single_use_capability",
+        "knowledge_hub.watchdog_or_lease_ttl",
+        "knowledge_hub.gate_close",
+        "knowledge_hub.restart"
+      ]
+    }
+  }
+}

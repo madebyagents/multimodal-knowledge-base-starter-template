@@ -1,0 +1,22 @@
+{
+  "artifact_manifest_ref": "evidence/hyperframes-palettes/value-artifacts.json",
+  "artifact_manifest_sha256": "eaaf6004feff2c1988f5ce329c65f7e6df03c9090222acf637bb0d0c03f4e55e",
+  "candidate_metrics": {
+    "answer_criteria_pass_count": 5,
+    "estimated_cost_usd": 0.0,
+    "invented_evidence_claims": 0,
+    "irrelevant_hit_rate_at_5": 0.0,
+    "negative_control_pass_count": 1,
+    "raw_source_body_leaks": 0,
+    "routing_pass_count": 5,
+    "unsupported_current_claims": 0
+  },
+  "certificate_id": "hyperframes-palettes-value-20260808",
+  "corpus_digest_sha256": "e77e9bd5444e9b3df16db85c32a848e26621d3cad1d94d859e2b01415d97299c",
+  "evaluated_at": "2026-08-08T10:48:39Z",
+  "evaluated_repository_revision": "f763c5481744ac775a4685f2af31148254b529d2",
+  "holdout_sha256": "5866518d046a8825ad8868e98cd8c9e6ffe76706fc83dce550bf87ce525359cf",
+  "production_profile_sha256": "b6975a9aa8e7370f0cc8e6436595757bd13012afc18d35b9532b8f20f9ba2899",
+  "runtime_capabilities_sha256": "eb216ac4e360807f5f3f28145e89f9ba84c72d8622ed386dccdcd769ac942b98",
+  "schema_version": "dantedash.governed_corpus_value_evidence.v1"
+}

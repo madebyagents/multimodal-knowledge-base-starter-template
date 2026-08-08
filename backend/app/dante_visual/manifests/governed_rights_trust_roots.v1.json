@@ -1,0 +1,130 @@
+{
+  "schema_version": "dantedash.governed_rights_trust_roots.v1",
+  "registry_id": "hyperframes-palettes-2935be6",
+  "provenance": {
+    "kind": "repository_reviewed_policy",
+    "owner": "dantedash",
+    "generated": false
+  },
+  "repository": {
+    "repository_id": "heygen-com/hyperframes",
+    "owner": "heygen-com",
+    "name": "hyperframes",
+    "https_url": "https://github.com/heygen-com/hyperframes",
+    "api_origin": "https://api.github.com"
+  },
+  "subject": {
+    "commit_sha1": "2935be6bf66d12f41ac768d841d567323b547357",
+    "root_tree_sha1": "5e1ec8b3286f0993d795b2e80198baacf65e737f",
+    "tree_chain": [
+      {
+        "path": "skills",
+        "git_tree_sha1": "cb9ef335e25ba0daa07c7d6b8c1d4b38ff3d7747"
+      },
+      {
+        "path": "skills/hyperframes",
+        "git_tree_sha1": "9e6c17e463e920645a16aec8799b1df4be07619c"
+      },
+      {
+        "path": "skills/hyperframes/palettes",
+        "git_tree_sha1": "56a80d6877b31ea7952481d35e752f75d030c75b"
+      }
+    ],
+    "sources": [
+      {
+        "relative_path": "bold-energetic.md",
+        "size_bytes": 417,
+        "git_blob_sha1": "e60e2d76a481c0f1f3853374532411426b261f9e",
+        "sha256": "17bc6b7889302151b4e5c84c0c6a33df676647078011d9decb2b68810e3baa7f"
+      },
+      {
+        "relative_path": "clean-corporate.md",
+        "size_bytes": 410,
+        "git_blob_sha1": "a4b79c939d0517c3235cccf9dadc4cc59ef5b8c8",
+        "sha256": "d0c8c86838abb77985609629afe600d0ca365eccd835820f309959e8a85cba9d"
+      },
+      {
+        "relative_path": "dark-premium.md",
+        "size_bytes": 389,
+        "git_blob_sha1": "84f81d5622d8f3fd18b97e072a45e171356008ae",
+        "sha256": "abfecbf7e8dca3b674376590a0467aac3e13b2135022ae4ec519c4b27c2303b1"
+      },
+      {
+        "relative_path": "jewel-rich.md",
+        "size_bytes": 394,
+        "git_blob_sha1": "fbd5542b2a01ba16e5601d20d4115bc91d146201",
+        "sha256": "17c8f7506469f66bca4e27ef78c19f0bcbf250f88fe840e3043816b7041c4fc5"
+      },
+      {
+        "relative_path": "monochrome.md",
+        "size_bytes": 454,
+        "git_blob_sha1": "e26d247379de3a2133af87294f5e3d7304a86c1e",
+        "sha256": "fe8586f6d70707098859063bdef34d68084f02cf7d5aaa436d4c9915a7ae3748"
+      },
+      {
+        "relative_path": "nature-earth.md",
+        "size_bytes": 399,
+        "git_blob_sha1": "cc3cb9d63b0320310852659b99d38de62e811288",
+        "sha256": "9710549b17487787fef3c7cb459cfd6e4ac28c1593bf471fcf55a3b4e546beed"
+      },
+      {
+        "relative_path": "neon-electric.md",
+        "size_bytes": 380,
+        "git_blob_sha1": "94c3e86e8de695ad49c1108c96ea3113095de368",
+        "sha256": "35225bf8d2cd37223e88e0bc59b0a96bc8adeda7225389b3df97b675cfd33dfb"
+      },
+      {
+        "relative_path": "pastel-soft.md",
+        "size_bytes": 392,
+        "git_blob_sha1": "f4e99c5383955b41932e776152f38be5179ce27b",
+        "sha256": "ed4e25bb5f4953c002e55a53320249621437e03b5a11d43e3c1bd32c869b6d95"
+      },
+      {
+        "relative_path": "warm-editorial.md",
+        "size_bytes": 411,
+        "git_blob_sha1": "2b1907aac544928b0fd82d82a2bdd21960be6830",
+        "sha256": "c467ee3cc0bbf4b2bedccc8106e18293b8a06dbac8f092b10300492da0e0559a"
+      }
+    ]
+  },
+  "license_policy": {
+    "policy_id": "apache-2.0-root-license-no-overrides",
+    "spdx_id": "Apache-2.0",
+    "license_path": "LICENSE",
+    "license_blob_sha1": "ae06b37e1c5116ccfaa615ac25ec1aabf5658d8c",
+    "license_sha256": "4259155fb06f127687ee7b0a8a3682d45132db0f2da26cbc0b7a2d1e796436b8",
+    "license_size_bytes": 10763,
+    "notice_path": "NOTICE",
+    "notice_required": false,
+    "path_marker_policy": "root_license_only",
+    "source_spdx_policy": "absent_or_apache-2.0",
+    "permitted_uses": [
+      "derived_summary",
+      "external_provider_disclosure",
+      "local_embedding"
+    ],
+    "attribution_required": true,
+    "trademark_rights_granted": false
+  },
+  "policy_engine": {
+    "engine_id": "dantedash.apache-2.0-path-coverage.v1",
+    "authority_mode": "deterministic_registry_policy",
+    "scope": {
+      "repository_id": "heygen-com/hyperframes",
+      "subject_revision": "2935be6bf66d12f41ac768d841d567323b547357",
+      "license_spdx_id": "Apache-2.0",
+      "source_tree_path": "skills/hyperframes/palettes",
+      "source_paths": [
+        "bold-energetic.md",
+        "clean-corporate.md",
+        "dark-premium.md",
+        "jewel-rich.md",
+        "monochrome.md",
+        "nature-earth.md",
+        "neon-electric.md",
+        "pastel-soft.md",
+        "warm-editorial.md"
+      ]
+    }
+  }
+}
